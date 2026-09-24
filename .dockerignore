@@ -1,0 +1,7 @@
+.git
+.venv
+.env
+jev-seo-reports
+examples
+docs
+**/__pycache__

@@ -5,6 +5,7 @@
   run    <url>        audit then render in one step
   rescore <dir>       rebuild findings and scores from a saved audit (no network, no spend)
   doctor              check dependencies and credentials without printing secrets
+  serve               web app: enter a URL, get the meta inspector and the audit score in the browser
 """
 from __future__ import annotations
 
@@ -266,7 +267,13 @@ def doctor(_args) -> None:
     print(json.dumps(report, indent=1))
 
 
-def main(argv=None) -> None:
+def serve(args) -> None:
+    from jevseo import web
+
+    web.serve(args.host, args.port, Path(args.data_dir))
+
+
+def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(prog="jevseo", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(required=True)
 
@@ -304,5 +311,14 @@ def main(argv=None) -> None:
     p.set_defaults(func=rescore)
     p = sub.add_parser("doctor")
     p.set_defaults(func=doctor)
-    args = ap.parse_args(argv)
+    p = sub.add_parser("serve")
+    p.add_argument("--host", default="127.0.0.1", help="use 0.0.0.0 to accept connections from other machines")
+    p.add_argument("--port", type=int, default=8000)
+    p.add_argument("--data-dir", default="jev-seo-reports/web", help="where web audits and their reports are written")
+    p.set_defaults(func=serve)
+    return ap
+
+
+def main(argv=None) -> None:
+    args = build_parser().parse_args(argv)
     args.func(args)
