@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Web app redesign: the score now sits on a ruler marked with the engine's own grade bands (F, D 40, C 60, B 75, A 90); failed checks show the points each fix adds, with a hint; the Google preview measures the title in pixels; the site audit shows its seven stages while running, then area weights, priority filters and the first action opened. Dark mode and phone layouts included.
 - Web app (`jevseo serve`): enter a URL and get an instant one-page inspection with an on-page score out of 100, then the full site audit score, ranked actions and PDF, XLSX and Markdown downloads, with live progress.
 - One-page inspector in the style of SEO META in 1 CLICK: summary tags with length checks, Google, Facebook and X previews, heading outline, images, links with filters and CSV export, Open Graph and Twitter tags, JSON-LD and microdata, robots.txt and sitemap, and shortcuts to third-party checkers.
 - Vietnamese interface by default, with English one click away; every rule's title and fix is translated.

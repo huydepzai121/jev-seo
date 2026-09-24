@@ -4,331 +4,483 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jev SEO Check</title>
-<meta name="description" content="Nhập URL để phân tích SEO: điểm on-page tức thì, audit toàn site, meta, tiêu đề, hình ảnh, liên kết, mạng xã hội và schema.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='14' cy='14' r='9' fill='none' stroke='%230b6b5d' stroke-width='4'/%3E%3Cpath d='M21 21l7 7' stroke='%230b6b5d' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="description" content="Nhập URL để biết website đạt bao nhiêu điểm SEO: điểm on-page tức thì, audit toàn site 52 quy tắc, meta, tiêu đề, hình ảnh, liên kết, mạng xã hội và schema.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' fill='none'%3E%3Ccircle cx='13' cy='13' r='9' stroke='%230B1B2B' stroke-width='2.5'/%3E%3Cpath d='M20 20l7 7' stroke='%230B1B2B' stroke-width='2.5' stroke-linecap='round'/%3E%3Cpath d='M8 13h2M12 13h2M16 13h2' stroke='%23C8410E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 :root{
-  --bg:#f4f5f1; --surface:#ffffff; --sunk:#eceee8; --ink:#15181a; --muted:#5b625f; --line:#dde0d9;
-  --accent:#0b6b5d; --accent-ink:#ffffff; --accent-soft:#dcefe9;
-  --good:#1d8a4b; --warn:#b7791f; --bad:#c2412d; --good-bg:#e3f4e8; --warn-bg:#fbf0dc; --bad-bg:#fbe5e0;
-  --serp-title:#1a0dab; --serp-url:#1f6f43;
+  --ground:#EDF0F3; --surface:#FFFFFF; --sunk:#EDF0F3; --ink:#0B1B2B; --ink-2:#3A4654; --muted:#566271; --line:#D5DBE2; --line-2:#C3CBD4; --hair:#E3E8ED;
+  --accent:#C8410E; --on-accent:#FFFFFF;
+  --inv-bg:#0B1B2B; --inv-fg:#FFFFFF; --inv-muted:#AEB9C5; --inv-line:#3A4A5C;
+  --g-a:#177245; --g-b:#3F6B21; --g-c:#8A5300; --g-d:#C2410C; --g-f:#B42318;
+  --band-f:#F3D4CF; --band-d:#F6DDCB; --band-c:#F2E6C4; --band-b:#D9E8C8; --band-a:#C6E3D1;
+  --ok-bg:#DCEFE3; --ok-fg:#13603A; --ok-soft:#EEF6F1; --warn-bg:#FBEFD9; --warn-fg:#6B4100; --bad-bg:#FBE4E1; --bad-fg:#8F1B12;
+  --serp-title:#1A0DAB; --serp-text:#4D5156;
+  --display:"Bricolage Grotesque","Be Vietnam Pro",system-ui,sans-serif; --body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#101312; --surface:#171b1a; --sunk:#1e2322; --ink:#e8ece9; --muted:#9aa39f; --line:#2a302e;
-  --accent:#3fbfa6; --accent-ink:#06201b; --accent-soft:#16352f;
-  --good:#4cc47f; --warn:#e3a94a; --bad:#f07a63; --good-bg:#143222; --warn-bg:#35290f; --bad-bg:#3a1a14;
-  --serp-title:#8ab4f8; --serp-url:#7fc79a; color-scheme:dark}}
+  --ground:#0E1620; --surface:#152130; --sunk:#1B2A3B; --ink:#E7ECF1; --ink-2:#C4CDD6; --muted:#9AA7B4; --line:#263447; --line-2:#33455B; --hair:#223043;
+  --accent:#F07A45; --on-accent:#1A0B04;
+  --inv-bg:#1F3148; --inv-fg:#FFFFFF; --inv-muted:#AEB9C5; --inv-line:#3E536C;
+  --g-a:#5CCB8C; --g-b:#9CCB6A; --g-c:#E7B25A; --g-d:#F08A5D; --g-f:#F2786A;
+  --band-f:#5E2621; --band-d:#653822; --band-c:#5F4E21; --band-b:#3B5429; --band-a:#24533A;
+  --ok-bg:#16392A; --ok-fg:#7FD6A2; --ok-soft:#132F23; --warn-bg:#3A2C10; --warn-fg:#F1C77A; --bad-bg:#3E1C18; --bad-fg:#F6A195;
+  --serp-title:#8AB4F8; --serp-text:#BDC1C6; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#101312; --surface:#171b1a; --sunk:#1e2322; --ink:#e8ece9; --muted:#9aa39f; --line:#2a302e;
-  --accent:#3fbfa6; --accent-ink:#06201b; --accent-soft:#16352f;
-  --good:#4cc47f; --warn:#e3a94a; --bad:#f07a63; --good-bg:#143222; --warn-bg:#35290f; --bad-bg:#3a1a14;
-  --serp-title:#8ab4f8; --serp-url:#7fc79a; color-scheme:dark}
+  --ground:#0E1620; --surface:#152130; --sunk:#1B2A3B; --ink:#E7ECF1; --ink-2:#C4CDD6; --muted:#9AA7B4; --line:#263447; --line-2:#33455B; --hair:#223043;
+  --accent:#F07A45; --on-accent:#1A0B04;
+  --inv-bg:#1F3148; --inv-fg:#FFFFFF; --inv-muted:#AEB9C5; --inv-line:#3E536C;
+  --g-a:#5CCB8C; --g-b:#9CCB6A; --g-c:#E7B25A; --g-d:#F08A5D; --g-f:#F2786A;
+  --band-f:#5E2621; --band-d:#653822; --band-c:#5F4E21; --band-b:#3B5429; --band-a:#24533A;
+  --ok-bg:#16392A; --ok-fg:#7FD6A2; --ok-soft:#132F23; --warn-bg:#3A2C10; --warn-fg:#F1C77A; --bad-bg:#3E1C18; --bad-fg:#F6A195;
+  --serp-title:#8AB4F8; --serp-text:#BDC1C6; color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font:15px/1.55 "Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
-a{color:var(--accent)}
+body{background:var(--ground);color:var(--ink);font:15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1312px;margin:0 auto;padding-inline:clamp(16px,4.4vw,64px)}
+a{color:var(--ink)}a:hover{color:var(--accent)}
 button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.86em}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.15}
+.mono{font-family:var(--mono);font-size:.86em}
 .muted{color:var(--muted)}
-h1,h2,h3{text-wrap:balance;line-height:1.2;margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.h2{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:-.01em}
 
 /* top bar */
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em;font-size:1.05rem}
-.brand svg{width:26px;height:26px}
-.brand small{font-weight:500;color:var(--muted);font-size:.8rem;letter-spacing:.02em}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--surface)}
-.seg button{border:0;background:none;padding:4px 12px;border-radius:999px;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.top{border-bottom:1px solid var(--line)}
+.top .wrap{min-height:72px;display:flex;align-items:center;gap:12px 32px;flex-wrap:wrap;padding-block:12px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.brand>span{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em}
+.brand small{font:500 12px var(--mono);color:var(--muted);margin-left:2px}
+.topform{flex:1 1 360px;max-width:720px;min-width:0;display:flex;gap:8px}
+.topform .field{flex:1 1 0;height:44px;border-width:1px;border-color:var(--line-2);border-radius:10px;padding:0 14px}
+.topform .field span{font-size:13px}
+.topform .field input{font-size:15px}
+.topform button{height:44px;padding:0 20px;border:0;border-radius:10px;background:var(--ink);color:var(--ground);font-weight:600;white-space:nowrap}
+.topnav{display:flex;align-items:center;gap:24px;margin-left:auto;font-size:15px;font-weight:500}
+.topnav a{text-decoration:none}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;color:var(--muted);min-height:32px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
 
-/* search */
-.hero{padding-block:28px 22px}
-.hero h1{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800;letter-spacing:-.02em;max-width:22ch}
-.hero p{margin:.5em 0 0;color:var(--muted);max-width:62ch}
-form.search{margin-top:20px;display:grid;grid-template-columns:1fr auto;gap:10px}
-.field{display:flex;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding-inline:14px;min-width:0}
+/* field */
+.field{display:flex;align-items:center;gap:10px;background:var(--surface);border:2px solid var(--ink);border-radius:14px;padding:0 18px;height:64px;min-width:0;flex:1 1 auto}
 .field:focus-within{border-color:var(--accent)}
-.field span{color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:.85rem}
-.field input{border:0;outline:0;background:none;padding:14px 8px;width:100%;min-width:0;font-size:1.02rem}
-.go{border:0;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-weight:700;padding:0 26px;cursor:pointer;font-size:1rem}
-.go:disabled{opacity:.6;cursor:progress}
-.opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:.88rem;color:var(--muted);align-items:center}
-.opts label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
-.opts select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:3px 6px}
-.recent{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.recent button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:2px 10px;font-size:.8rem;cursor:pointer;color:var(--muted)}
-.alert{margin-top:14px;padding:10px 14px;border-radius:10px;background:var(--bad-bg);color:var(--bad);font-weight:500}
+.field span{font-family:var(--mono);font-size:15px;color:var(--muted)}
+.field input{border:0;outline:0;background:none;flex:1;min-width:0;width:100%;font-size:19px;font-weight:500}
 
-/* results layout */
-#results{padding-bottom:60px}
-.head{display:grid;grid-template-columns:auto auto 1fr;gap:16px;align-items:stretch;margin-bottom:16px}
-.scorecard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:center;min-width:0}
-.ring{--p:0;--c:var(--accent);width:92px;height:92px;border-radius:50%;flex:none;display:grid;place-items:center;
-  background:radial-gradient(closest-side,var(--surface) 78%,transparent 79% 100%),conic-gradient(var(--c) calc(var(--p)*1%),var(--sunk) 0)}
-.ring b{font-size:1.55rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.ring b small{font-size:.8rem;font-weight:600}
-.scorecard h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
-.scorecard .big{font-size:1rem;font-weight:700;margin-top:2px}
-.scorecard .sub{font-size:.82rem;color:var(--muted)}
-.bar{height:6px;background:var(--sunk);border-radius:6px;overflow:hidden;margin-top:8px;width:160px;max-width:100%}
-.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
-.pageid{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
-.pageid .u{word-break:break-all;font-weight:600}
-.pageid .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+/* hero */
+.hero{padding-block:clamp(40px,7vw,72px) 48px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.hero-main{display:flex;flex-direction:column;gap:26px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,6.2vw,76px);line-height:.98;letter-spacing:-.035em}
+.hero p.lead{margin:0;font-size:clamp(16px,1.5vw,19px);color:var(--ink-2);max-width:600px}
+form.search{display:flex;flex-direction:column;gap:14px}
+.search-row{display:flex;gap:10px}
+.go{height:64px;padding:0 34px;border:0;border-radius:14px;background:var(--accent);color:var(--on-accent);font-weight:700;font-size:18px;display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-shrink:0}
+.go:disabled{opacity:.7;cursor:progress}
+.opts{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:8px 14px;min-height:44px;cursor:pointer}
+.pill input[type=checkbox]{accent-color:var(--ink);width:16px;height:16px;margin:0}
+.pages{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:4px 4px 4px 14px;min-height:44px}
+.pages>span{color:var(--muted);margin-right:6px}
+.pages button{border:0;background:transparent;font-weight:600;font-size:14px;padding:7px 12px;border-radius:999px}
+.pages button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.recent{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.recent button{border:1px solid var(--line-2);background:transparent;border-radius:999px;padding:4px 12px;font:12px var(--mono);color:var(--ink)}
+.alert{padding:12px 16px;border-radius:12px;background:var(--bad-bg);color:var(--bad-fg);font-weight:500}
+.sample{background:var(--surface);border-radius:20px;padding:28px 30px;box-shadow:0 1px 0 var(--line),0 24px 48px -28px rgba(11,27,43,.35);display:flex;flex-direction:column;gap:22px;margin-top:12px}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:clamp(40px,6vw,64px)}
+.steps3>div{border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+.steps3 b{font-family:var(--display);font-weight:700;font-size:21px}
+.steps3 span:last-child{font-size:14px;color:var(--ink-2)}
+body.has-results .hero{display:none}
+body:not(.has-results) .topform{display:none}
 
-.chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:1px 9px;font-size:.76rem;font-weight:600;background:var(--sunk);color:var(--muted);white-space:nowrap}
-.chip.good{background:var(--good-bg);color:var(--good)}
-.chip.warn{background:var(--warn-bg);color:var(--warn)}
-.chip.bad{background:var(--bad-bg);color:var(--bad)}
-.chip.acc{background:var(--accent-soft);color:var(--accent)}
+/* score */
+.big{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.num{font-family:var(--display);font-weight:800;font-size:clamp(72px,8vw,96px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.num small{font-size:.4em;letter-spacing:0}
+.grade{font-family:var(--display);font-weight:700;font-size:22px;padding-bottom:4px}
+.ga{color:var(--g-a)}.gb{color:var(--g-b)}.gc{color:var(--g-c)}.gd{color:var(--g-d)}.gf{color:var(--g-f)}
+.ruler{position:relative;height:26px}
+.ruler .bands{position:absolute;inset:8px 0 auto 0;height:10px;display:flex;border-radius:3px;overflow:hidden}
+.ruler .bands i:nth-child(1){background:var(--band-f)}.ruler .bands i:nth-child(2){background:var(--band-d)}.ruler .bands i:nth-child(3){background:var(--band-c)}.ruler .bands i:nth-child(4){background:var(--band-b)}.ruler .bands i:nth-child(5){background:var(--band-a)}
+.ruler b{position:absolute;top:0;width:4px;height:26px;margin-left:-2px;background:var(--ink);border-radius:2px;transition:left .5s}
+.ruler-labels{display:flex;font:11px var(--mono);color:var(--muted);margin-top:8px;white-space:nowrap}
+.inverse .ruler b{background:var(--inv-fg)}
+.inverse .ruler-labels{color:var(--inv-muted)}
+@media (prefers-reduced-motion:reduce){.ruler b{transition:none}}
+
+/* cards */
+.card{background:var(--surface);border-radius:20px;padding:26px 30px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.inverse{background:var(--inv-bg);color:var(--inv-fg)}
+.inverse .eyebrow{color:var(--inv-muted)}
+.inverse .ruler .bands i:nth-child(1){background:#7A2E28}.inverse .ruler .bands i:nth-child(2){background:#83462A}.inverse .ruler .bands i:nth-child(3){background:#7C6427}.inverse .ruler .bands i:nth-child(4){background:#4A6A33}.inverse .ruler .bands i:nth-child(5){background:#2F6A48}
+.inverse details.logbox summary{color:var(--inv-muted)}
+.badge{display:inline-flex;align-items:center;gap:5px;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:600;white-space:nowrap;background:var(--sunk);color:var(--ink-2)}
+.badge.ok{background:var(--ok-bg);color:var(--ok-fg)}.badge.warn{background:var(--warn-bg);color:var(--warn-fg)}.badge.bad{background:var(--bad-bg);color:var(--bad-fg)}
+.badge.mono{font-family:var(--mono);font-size:12px;font-weight:600}
+.badge.line{background:var(--surface);border:1px solid var(--line)}
+
+#results{padding-block:36px 72px}
+.ident{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ident .u{font-family:var(--display);font-weight:700;font-size:clamp(20px,2vw,26px);letter-spacing:-.01em;word-break:break-all}
+.scores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:22px}
+.linkline{margin-left:auto;font-size:14px;font-weight:600;border:0;background:none;padding:0 0 2px;border-bottom:2px solid var(--accent);color:var(--ink)}
 
 /* tabs */
-.tabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:thin}
-.tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;font-weight:600;color:var(--muted);border-bottom:2.5px solid transparent;white-space:nowrap;font-size:.92rem}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-.tabs button .n{font-size:.72rem;background:var(--sunk);border-radius:999px;padding:0 6px;margin-left:5px;color:var(--muted)}
-.panel{padding-top:18px}
-.grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px}
-.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
-.box>h2{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-.stack{display:flex;flex-direction:column;gap:18px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-2);margin-top:28px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{border:0;background:none;padding:12px 16px;font-size:15px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tabs .n{font:12px var(--mono);color:var(--muted);margin-left:6px}
+.panel{padding-top:28px}
+.cols{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;align-items:start}
+.cols.audit{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}
+.stack{display:flex;flex-direction:column;gap:24px;min-width:0}
 
-/* checklist */
-.checks{list-style:none;margin:0;padding:0}
-.checks li{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:8px 0;border-bottom:1px solid var(--line)}
-.checks li:last-child{border-bottom:0}
-.dot{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;font-weight:800;margin-top:1px}
-.dot.pass{background:var(--good-bg);color:var(--good)} .dot.warn{background:var(--warn-bg);color:var(--warn)} .dot.fail{background:var(--bad-bg);color:var(--bad)}
-.checks .w{font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+/* fix list */
+.fixes{display:flex;flex-direction:column}
+.fix{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:14px;align-items:start;padding:14px 0;border-top:1px solid var(--hair)}
+.mark{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.mark.fail{background:var(--bad-bg);color:var(--g-f)}.mark.warn{background:var(--warn-bg);color:var(--g-c)}
+.fix b{font-weight:600;font-size:16px;display:block}
+.fix p{margin:3px 0 0;font-size:14px;color:var(--muted)}
+.pts{font:600 14px var(--mono);background:var(--sunk);border-radius:6px;padding:3px 8px;white-space:nowrap}
+.passed{display:flex;flex-wrap:wrap;gap:8px}
+.passed span{display:inline-flex;align-items:center;gap:6px;background:var(--ok-soft);color:var(--ok-fg);border-radius:8px;padding:6px 10px;font-size:14px;font-weight:500}
+.empty-ok{color:var(--ok-fg);font-weight:600}
+
+/* serp */
+.serp{border:1px solid var(--hair);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;font-family:Arial,system-ui,sans-serif}
+.serp .site{display:flex;align-items:center;gap:10px}
+.serp .fav{width:28px;height:28px;border-radius:50%;background:var(--sunk);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;overflow:hidden;flex:none}
+.serp .fav img{width:18px;height:18px}
+.serp .name{font-size:14px}
+.serp .url{font-size:12px;color:var(--serp-text);word-break:break-all}
+.serp .t{font-size:20px;color:var(--serp-title);line-height:1.3;margin-top:6px}
+.serp .d{font-size:14px;color:var(--serp-text);line-height:1.55}
+.meter{display:flex;flex-direction:column;gap:6px}
+.meter .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.meter .row span:last-child{font-family:var(--mono);color:var(--muted);font-size:13px}
+.meter .bar{position:relative;height:8px;background:var(--sunk);border-radius:4px}
+.meter .bar i{display:block;height:8px;border-radius:4px;max-width:100%}
+.meter .bar s{position:absolute;top:-4px;width:2px;height:16px;background:var(--ink);margin-left:-1px}
+.meter .bar s.min{background:var(--muted)}
+.meter small{font-size:12px;color:var(--muted)}
 
 /* key-value */
-.kv{display:grid;grid-template-columns:minmax(110px,180px) minmax(0,1fr);border-top:1px solid var(--line)}
-.kv>div{padding:9px 0;border-bottom:1px solid var(--line);min-width:0}
-.kv>div:nth-child(odd){color:var(--muted);font-size:.86rem;padding-right:12px;font-weight:500}
-.kv .val{word-break:break-word}
-.len{font-size:.75rem;margin-left:6px}
-.empty{color:var(--bad);font-style:italic}
-
-/* serp + social previews */
-.serp{font-family:Arial,system-ui,sans-serif;max-width:600px}
-.serp .site{display:flex;gap:10px;align-items:center;font-size:.82rem}
-.serp .site img{width:26px;height:26px;border-radius:50%;background:var(--sunk);padding:4px}
-.serp .t{color:var(--serp-title);font-size:1.25rem;line-height:1.3;margin:4px 0 3px}
-.serp .d{color:var(--muted);font-size:.9rem}
-.serp .url{color:var(--ink);font-size:.8rem}
-.card-prev{border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:520px;background:var(--sunk)}
-.card-prev .img{aspect-ratio:1.91/1;background:var(--line) center/cover no-repeat;display:grid;place-items:center;color:var(--muted);font-size:.85rem;max-width:100%}
-.card-prev .body{padding:10px 12px}
-.card-prev .dom{font-size:.72rem;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
-.card-prev .ct{font-weight:700;margin:2px 0}
-.card-prev .cd{font-size:.86rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-
-/* tables */
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;font-size:.86rem}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{position:sticky;top:0;background:var(--sunk);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
-tr:last-child td{border-bottom:0}
-td.num{text-align:right;font-variant-numeric:tabular-nums}
-td .thumb{width:54px;height:40px;object-fit:contain;background:var(--sunk);border-radius:4px}
-td a{word-break:break-all}
-.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
-.toolbar input[type=search]{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-width:0;flex:1 1 200px}
-.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 12px;cursor:pointer;font-size:.84rem;font-weight:600}
-.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:14px}
-.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
-.tile b{display:block;font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.tile span{font-size:.78rem;color:var(--muted)}
-.tile.bad b{color:var(--bad)} .tile.warn b{color:var(--warn)}
-
-/* headings outline */
-.outline{list-style:none;margin:0;padding:0}
-.outline li{display:flex;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line);align-items:baseline}
-.outline .lv{font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:600;border-radius:5px;padding:0 5px;background:var(--sunk);color:var(--muted);flex:none}
-.outline .lv.h1{background:var(--accent);color:var(--accent-ink)}
-
-/* schema */
-details.sd{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:10px}
-details.sd summary{padding:10px 14px;cursor:pointer;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-weight:600}
-details.sd pre{margin:0;padding:12px 14px;border-top:1px solid var(--line);overflow:auto;max-height:420px;font-size:.8rem;background:var(--sunk)}
-
-/* tools */
-.toolgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.toolgrid a{display:flex;justify-content:space-between;gap:8px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-weight:600;font-size:.9rem}
-.toolgrid a:hover{border-color:var(--accent)}
-.toolgrid a span{color:var(--muted)}
+.kv{display:grid;grid-template-columns:minmax(110px,160px) minmax(0,1fr);font-size:14px}
+.kv>*{padding:11px 0;border-top:1px solid var(--hair);min-width:0}
+.kv>:nth-child(odd){color:var(--muted);padding-right:12px}
+.kv .v{word-break:break-word}
+.kv .v.mono{font-size:13px}
+.len{margin-left:6px}
+.miss{color:var(--g-f);font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
 
 /* audit */
-.stages{list-style:none;padding:0;margin:0 0 12px;display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.stages li{font-size:.7rem;color:var(--muted);text-align:center}
-.stages li i{display:block;height:5px;border-radius:4px;background:var(--sunk);margin-bottom:4px}
-.stages li.done i{background:var(--accent)} .stages li.now i{background:var(--warn)}
-.log{background:var(--sunk);border-radius:10px;padding:10px 12px;max-height:220px;overflow:auto;font-size:.76rem;white-space:pre-wrap;word-break:break-word;margin:0}
-.cats{display:flex;flex-direction:column;gap:9px}
-.cat{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:.88rem}
-.cat .track{grid-column:1/-1;height:7px;border-radius:6px;background:var(--sunk);overflow:hidden}
-.cat .track i{display:block;height:100%;border-radius:6px}
-.cat b{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.act{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:8px}
-.act summary{list-style:none;cursor:pointer;padding:10px 14px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.stepper{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.stepper li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:14px}
+.stepper .dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:1.5px solid var(--inv-line)}
+.stepper .done .dot{background:#2F6A48;border-color:#2F6A48;color:#fff}
+.stepper .now .dot{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.stepper .skip .dot{background:var(--inv-line);border-color:var(--inv-line);color:var(--inv-muted)}
+.stepper .todo span:nth-child(2),.stepper .skip span:nth-child(2){color:#8D99A6}
+.stepper .now span:nth-child(2){font-weight:700}
+.stepper em{font:normal 11px var(--mono);color:var(--inv-muted)}
+.note{background:rgba(244,199,122,.14);border-radius:12px;padding:12px 14px;font-size:14px;color:#F6DDB0}
+.cats{display:flex;flex-direction:column;gap:12px}
+.cat{display:flex;flex-direction:column;gap:6px}
+.cat .row{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.cat .w{font:12px var(--mono);color:var(--muted)}
+.cat .val{font:600 14px var(--mono);white-space:nowrap}
+.cat .val.na{font:13px var(--body);color:var(--muted)}
+.cat .track{height:8px;background:var(--sunk);border-radius:4px;overflow:hidden}
+.cat .track i{display:block;height:100%;border-radius:4px}
+.dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.dl a{display:flex;flex-direction:column;gap:2px;text-decoration:none;border:1px solid var(--line-2);border-radius:12px;padding:14px}
+.dl a b{font-family:var(--display);font-weight:800;font-size:22px}
+.dl a span{font-size:13px;color:var(--muted)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;min-height:40px;color:var(--ink-2)}
+.filters button.p1{background:var(--bad-bg);border-color:transparent;color:var(--bad-fg)}
+.filters button.p2{background:var(--warn-bg);border-color:transparent;color:var(--warn-fg)}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.act{border-bottom:1px solid var(--hair)}
+.act[open]{border:1.5px solid var(--ink);border-radius:14px;margin:8px 0}
+.act summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 4px}
+.act[open] summary{padding:18px 20px 10px;align-items:start}
 .act summary::-webkit-details-marker{display:none}
-.act .pri{font-weight:800;font-size:.76rem;border-radius:6px;padding:2px 7px}
-.pri.P1{background:var(--bad-bg);color:var(--bad)} .pri.P2{background:var(--warn-bg);color:var(--warn)} .pri.P3{background:var(--sunk);color:var(--muted)}
-.act .meta{display:flex;gap:6px;flex-wrap:wrap}
-.act .inner{padding:0 14px 12px;font-size:.88rem;display:flex;flex-direction:column;gap:6px}
+.act .t{font-weight:600;font-size:15px}
+.act[open] .t{font-weight:700;font-size:17px}
+.act .m{font-size:13px;color:var(--muted);margin-top:3px}
+.pri{border-radius:6px;padding:3px 8px;font:700 13px var(--mono)}
+.pri.P1{background:#B42318;color:#fff}.pri.P2{background:var(--warn-bg);color:var(--warn-fg)}.pri.P3{background:var(--sunk);color:var(--ink-2)}
+.act .inner{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px 14px;font-size:14px;padding:0 20px 18px 70px}
+.act .inner>b{font-weight:600}
 .act .inner ul{margin:0;padding-left:18px}
-.act .inner li{word-break:break-all}
-.dl{display:flex;flex-wrap:wrap;gap:8px}
-.note{font-size:.84rem;background:var(--warn-bg);color:var(--warn);padding:8px 12px;border-radius:10px}
-.spinner{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite;display:inline-block;vertical-align:-3px}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.spinner{animation:none}.bar i{transition:none}}
-footer{padding-block:24px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line)}
+.act .inner li,.act .inner a{word-break:break-all}
+.more{align-self:flex-start;margin-top:12px;border:1px solid var(--line-2);background:var(--surface);border-radius:10px;padding:10px 16px;font-weight:600;font-size:14px;min-height:44px}
+.log{background:var(--sunk);border-radius:10px;padding:10px 12px;max-height:240px;overflow:auto;font:12px/1.5 var(--mono);white-space:pre-wrap;word-break:break-word;margin:0;color:var(--ink-2)}
+.inverse .log{background:rgba(255,255,255,.06);color:var(--inv-muted)}
+details.logbox summary{cursor:pointer;font-size:13px;font-weight:600}
 
-@media (max-width:860px){
-  .head{grid-template-columns:1fr 1fr}
-  .pageid{grid-column:1/-1}
-  .grid2{grid-template-columns:1fr}
+/* data tabs */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.tile{background:var(--surface);border-radius:14px;padding:14px 16px}
+.tile b{display:block;font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.tile span{font-size:13px;color:var(--muted)}
+.tile.bad b{color:var(--g-f)}.tile.warn b{color:var(--g-c)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar input[type=search]{background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:9px 12px;min-width:0;flex:1 1 200px}
+.btn{border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px;min-height:40px}
+.btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.btn .c{font:12px var(--mono);opacity:.7;margin-left:6px}
+.tw{overflow-x:auto;border-radius:16px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--hair);text-align:left;vertical-align:top}
+th{font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+td a{word-break:break-all}
+td .thumb{width:56px;height:42px;object-fit:contain;background:var(--sunk);border-radius:6px}
+.outline{list-style:none;margin:0;padding:0}
+.outline li{display:flex;gap:10px;padding:7px 0;border-top:1px dashed var(--hair);align-items:baseline}
+.lv{font:600 11px var(--mono);border-radius:5px;padding:1px 6px;background:var(--sunk);color:var(--muted);flex:none}
+.lv.h1{background:var(--ink);color:var(--ground)}
+.cardprev{border:1px solid var(--hair);border-radius:14px;overflow:hidden;max-width:520px;background:var(--sunk)}
+.cardprev .img{aspect-ratio:1.91/1;background:var(--line) center/cover no-repeat;display:grid;place-items:center;color:var(--muted);font-size:14px;max-width:100%}
+.cardprev .body{padding:12px 14px}
+.cardprev .dom{font:11px var(--mono);text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
+.cardprev .ct{font-weight:700;margin:3px 0}
+.cardprev .cd{font-size:14px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+details.sd{background:var(--surface);border-radius:16px;margin-bottom:12px}
+details.sd summary{padding:14px 18px;cursor:pointer;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-weight:600}
+details.sd pre{margin:0;padding:14px 18px;border-top:1px solid var(--hair);overflow:auto;max-height:440px;font:12px/1.55 var(--mono);background:var(--sunk);border-radius:0 0 16px 16px}
+.toolgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.toolgrid a{display:flex;justify-content:space-between;gap:8px;text-decoration:none;border:1px solid var(--line-2);border-radius:12px;padding:12px 14px;font-weight:600;font-size:15px}
+.toolgrid a:hover{border-color:var(--accent)}
+.spinner{width:16px;height:16px;border-radius:50%;border:2.5px solid currentColor;border-top-color:transparent;display:inline-block;vertical-align:-3px;animation:spin .8s linear infinite;opacity:.8}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation:none}}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:980px){
+  .hero-grid,.cols,.cols.audit{grid-template-columns:1fr}
+  .topnav a{display:none}
 }
-@media (max-width:520px){
-  form.search{grid-template-columns:1fr}
-  .go{padding:12px}
-  .head{grid-template-columns:1fr}
-  .ring{width:76px;height:76px}
+@media (max-width:640px){
+  .scores,.steps3{grid-template-columns:1fr}
+  .search-row{flex-direction:column}
+  .go,.field{height:56px}
+  .card{padding:20px}
   .kv{grid-template-columns:1fr}
-  .kv>div:nth-child(odd){border-bottom:0;padding-bottom:0}
-  .stages li span{display:none}
+  .kv>:nth-child(even){border-top:0;padding-top:0}
+  .act .inner{grid-template-columns:1fr;padding:0 16px 16px}
+  .act[open] summary{padding:16px 16px 8px}
+  .topform{order:3;flex-basis:100%}
+  .linkline{margin-left:0}
+  .ruler-labels em{display:none}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="none" stroke="var(--accent)" stroke-width="3.5"/><path d="M21 21l7 7" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/><path d="M10 15.5l3 3 5-7" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>Jev SEO Check <small>v<span id="ver">0.1</span></small></span>
-    </div>
-    <div class="seg" role="group" aria-label="Language">
-      <button type="button" data-lang="vi" aria-pressed="true">VI</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
-  </header>
-
-  <section class="hero">
-    <h1 data-t="heroTitle"></h1>
-    <p data-t="heroSub"></p>
-    <form class="search" id="form" autocomplete="off">
-      <label class="field"><span>URL</span><input id="url" name="url" type="text" inputmode="url" spellcheck="false" required placeholder="https://vidu.vn"></label>
-      <button class="go" id="go" type="submit" data-t="analyze"></button>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Jev SEO Check">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="2.5"/><path d="M20 20l7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8 13h2M12 13h2M16 13h2" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Jev SEO Check</span><small>v<span id="ver">0.1</span></small>
+    </a>
+    <form class="topform" id="topform" autocomplete="off">
+      <label class="field"><span>https://</span><input id="url-top" type="text" inputmode="url" spellcheck="false" aria-label="URL"></label>
+      <button type="submit" data-t="reanalyze"></button>
     </form>
-    <div class="opts">
-      <label><input type="checkbox" id="opt-audit" checked> <span data-t="optAudit"></span></label>
-      <label><span data-t="optPages"></span>
-        <select id="opt-pages"><option value="10">10</option><option value="30" selected>30</option><option value="60">60</option></select></label>
-      <label><input type="checkbox" id="opt-psi" checked> <span data-t="optPsi"></span></label>
-    </div>
-    <div class="recent" id="recent"></div>
-    <div class="alert" id="error" hidden></div>
-  </section>
+    <nav class="topnav">
+      <a href="https://github.com/huydepzai121/jev-seo/blob/main/CAI-DAT.md" target="_blank" rel="noopener" data-t="installGuide"></a>
+      <a href="https://github.com/huydepzai121/jev-seo" target="_blank" rel="noopener">GitHub</a>
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-lang="vi" aria-pressed="true">VI</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
 
-  <section id="results" hidden>
-    <div class="head">
-      <div class="scorecard">
-        <div class="ring" id="ring-page"><b>–</b></div>
-        <div><h3 data-t="pageScore"></h3><div class="big" id="page-grade"></div><div class="sub" data-t="pageScoreSub"></div></div>
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="eyebrow" data-t="eyebrow"></div>
+        <h1 data-t="heroTitle"></h1>
+        <p class="lead" data-t="heroSub"></p>
+        <form class="search" id="form" autocomplete="off">
+          <div class="search-row">
+            <label class="field"><span>https://</span><input id="url" name="url" type="text" inputmode="url" spellcheck="false" required placeholder="ten-mien-cua-ban.vn" aria-label="URL"></label>
+            <button class="go" id="go" type="submit"></button>
+          </div>
+          <div class="opts">
+            <label class="pill"><input type="checkbox" id="opt-audit" checked> <span data-t="optAudit"></span></label>
+            <div class="pages" role="group" aria-labelledby="pages-label"><span id="pages-label" data-t="optPages"></span>
+              <button type="button" data-pages="10" aria-pressed="false">10</button><button type="button" data-pages="30" aria-pressed="true">30</button><button type="button" data-pages="60" aria-pressed="false">60</button>
+            </div>
+            <label class="pill"><input type="checkbox" id="opt-psi" checked> <span data-t="optPsi"></span></label>
+          </div>
+        </form>
+        <div class="recent" id="recent"></div>
+        <div class="alert" id="error" hidden></div>
       </div>
-      <div class="scorecard">
-        <div class="ring" id="ring-site"><b>–</b></div>
-        <div><h3 data-t="siteScore"></h3><div class="big" id="site-grade"></div><div class="sub" id="site-sub"></div><div class="bar" id="site-bar" hidden><i></i></div></div>
-      </div>
-      <div class="pageid"><div class="muted" style="font-size:.78rem" data-t="analyzed"></div><div class="u" id="final-url"></div><div class="chips" id="id-chips"></div></div>
+      <aside class="sample" aria-label="Ví dụ kết quả">
+        <div class="card-head"><span class="eyebrow" data-t="sampleLabel"></span><span class="muted" style="font-size:13px" data-t="pageScoreSub"></span></div>
+        <div class="big"><span class="num" style="font-size:clamp(80px,8vw,112px)">82<small>%</small></span><div style="display:flex;flex-direction:column;gap:2px;padding-bottom:6px"><span class="grade gb" data-t="gradeB"></span><span class="muted" style="font-size:14px" data-t="pageScore"></span></div></div>
+        <div id="sample-ruler"></div>
+        <div class="fixes" id="sample-fixes"></div>
+      </aside>
+    </div>
+    <div class="steps3">
+      <div><span class="eyebrow" data-t="s1k"></span><b data-t="s1t"></b><span data-t="s1d"></span></div>
+      <div><span class="eyebrow" data-t="s2k"></span><b data-t="s2t"></b><span data-t="s2d"></span></div>
+      <div><span class="eyebrow" data-t="s3k"></span><b data-t="s3t"></b><span data-t="s3d"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="results" hidden>
+  <div class="wrap">
+    <div class="ident" id="ident"></div>
+    <div class="alert" id="error2" hidden style="margin-top:16px"></div>
+    <div class="scores">
+      <div class="card" id="page-card"></div>
+      <div class="card" id="site-card"></div>
     </div>
     <nav class="tabs" role="tablist" id="tabs"></nav>
     <div class="panel" id="panel"></div>
-  </section>
+  </div>
+</section>
+</main>
 
-  <footer>
-    <span data-t="footer"></span>
-  </footer>
-</div>
+<footer><div class="wrap"><span data-t="footer"></span><span>Jev SEO Check</span></div></footer>
 
 <script>
 "use strict";
 const I18N = {
   vi: {
-    heroTitle: "Kiểm tra SEO website trong một lần nhấp",
-    heroSub: "Nhập URL: công cụ đọc ngay meta, tiêu đề, hình ảnh, liên kết, mạng xã hội và schema của trang, chấm điểm on-page theo %, rồi audit toàn site với 52 quy tắc theo Google Search Central.",
-    analyze: "Phân tích", analyzing: "Đang phân tích…",
-    optAudit: "Audit toàn site", optPages: "Số trang tối đa", optPsi: "Đo Core Web Vitals (PageSpeed)",
-    pageScore: "Điểm trang này", pageScoreSub: "On-page, 20 tiêu chí", siteScore: "Điểm toàn site", analyzed: "Trang đã phân tích",
-    footer: "Jev SEO Check. Điểm số giúp xếp thứ tự việc cần làm, không dự đoán thứ hạng hay lưu lượng truy cập.",
+    eyebrow: "Kiểm tra SEO · 52 quy tắc theo Google Search Central",
+    heroTitle: "Website của bạn đạt bao nhiêu điểm SEO?",
+    heroSub: "Dán URL vào đây. Điểm trang hiện sau vài giây, điểm toàn site sau 1 đến 4 phút, kèm danh sách việc cần sửa xếp theo mức ưu tiên.",
+    analyze: "Phân tích", analyzing: "Đang phân tích…", reanalyze: "Phân tích lại", installGuide: "Hướng dẫn cài đặt",
+    optAudit: "Audit toàn site", optPages: "Số trang", optPsi: "Đo Core Web Vitals", recent: "Gần đây",
+    sampleLabel: "Ví dụ · hatmoc.vn", pageScore: "Điểm trang này", pageScoreSub: "20 tiêu chí on-page", gradeB: "Hạng B",
+    s1k: "Bước 1 · vài giây", s1t: "Đọc trang bạn nhập", s1d: "Meta, tiêu đề, ảnh, liên kết, Open Graph, schema, robots.txt và sitemap.",
+    s2k: "Bước 2 · 1 đến 4 phút", s2t: "Audit toàn site", s2d: "Thu thập tối đa 60 trang, chấm 9 hạng mục, đo Core Web Vitals.",
+    s3k: "Bước 3 · tải về", s3t: "Báo cáo PDF, Excel, Markdown", s3d: "Gửi khách hàng, theo dõi tiến độ sửa, hoặc đưa lên GitHub.",
+    footer: "Điểm số giúp xếp thứ tự việc cần làm, không dự đoán thứ hạng hay lưu lượng truy cập.",
+    analyzedLabel: "Đã phân tích", pageCardLabel: "Điểm trang này · 20 tiêu chí", siteCardLabel: n => `Điểm toàn site${n ? ` · ${n} URL` : ""}`,
+    counts: (p, w, f) => `${p} đạt · ${w} cảnh báo · ${f} lỗi`, grade: g => `Hạng ${g}`, partial: "Audit một phần",
+    seeActions: n => `Xem ${n} việc cần làm →`,
     tabOverview: "Tổng quan", tabSummary: "Tóm tắt", tabHeadings: "Tiêu đề", tabImages: "Hình ảnh", tabLinks: "Liên kết", tabSocial: "Mạng xã hội", tabSchema: "Schema", tabTools: "Công cụ", tabAudit: "Audit toàn site",
-    checklist: "Tiêu chí on-page", serp: "Xem trước trên Google", passed: "đạt", warned: "cảnh báo", failed: "lỗi",
+    fixFirst: "Cần sửa trước", gain: x => `Sửa hết được thêm <b>${x} điểm</b>`, passedTitle: "Đã đạt", passedMeta: (n, s) => `${n} tiêu chí · ${s} / 100 điểm`, allPassed: "Trang đạt tất cả 20 tiêu chí.",
+    serpTitle: "Trên Google sẽ hiện thế này", titleBar: (c, px) => `${c} ký tự · ~${px} / 600 px`, descBar: c => `${c} / 160 ký tự`, barNote: "Vạch xám: tối thiểu 70 ký tự. Vạch đen: Google cắt bớt.",
+    crawlTitle: "Thu thập và lập chỉ mục",
     title: "Title", description: "Description", keywords: "Keywords", url: "URL", canonical: "Canonical", robots: "Robots meta", xrobots: "X-Robots-Tag",
     author: "Author", publisher: "Publisher", lang: "Ngôn ngữ", charset: "Charset", viewport: "Viewport", favicon: "Favicon", hreflang: "Hreflang",
     words: "Số từ", status: "Mã HTTP", ttfb: "Thời gian phản hồi", size: "Dung lượng HTML", redirects: "Chuyển hướng", generator: "Generator", server: "Server", themeColor: "Theme color",
     robotsTxt: "robots.txt", sitemap: "Sitemap", missing: "Thiếu", chars: "ký tự", selfCanon: "tự tham chiếu", otherCanon: "trỏ tới URL khác", none: "Không có",
-    found: "có", notFound: "không có", urlsInSitemap: "URL trong sitemap", aiBots: "Bot AI được phép",
-    headingCounts: "Số lượng", outline: "Cấu trúc tiêu đề", filterAll: "Tất cả",
+    found: "có", notFound: "không có", urlsInSitemap: "URL trong sitemap", aiBots: "Bot AI được phép", robotsDefault: "index, follow (mặc định)",
+    outline: "Cấu trúc tiêu đề", filterAll: "Tất cả", skipped: n => `bỏ qua cấp ${n} lần`, emptyHeading: "(rỗng)",
     imgTotal: "Tổng ảnh", imgNoAlt: "Thiếu alt", imgEmptyAlt: "Alt rỗng", imgNoTitle: "Thiếu title", imgNoDim: "Thiếu kích thước",
     onlyMissingAlt: "Chỉ ảnh thiếu alt", image: "Ảnh", alt: "Alt", size2: "Kích thước",
-    linkTotal: "Tổng liên kết", linkUnique: "Duy nhất", internal: "Nội bộ", external: "Ra ngoài", nofollow: "Nofollow", noTitle: "Thiếu title", emptyAnchor: "Anchor rỗng",
+    linkTotal: "Tổng liên kết", linkUnique: "Duy nhất", internal: "Nội bộ", external: "Ra ngoài", other: "Khác", nofollow: "Nofollow", noTitle: "Thiếu title", emptyAnchor: "Anchor rỗng",
     anchor: "Anchor text", rel: "Rel", type: "Loại", search: "Tìm…", exportCsv: "Tải CSV", copy: "Sao chép", copied: "Đã chép",
     ogTags: "Thẻ Open Graph", twTags: "Thẻ Twitter", fbPreview: "Xem trước Facebook", twPreview: "Xem trước X (Twitter)", noImage: "Không có ảnh",
     jsonld: "JSON-LD", valid: "hợp lệ", invalid: "lỗi cú pháp", microdata: "Microdata", rdfa: "RDFa", noSchema: "Trang không có dữ liệu có cấu trúc.",
+    schemaTip: "Gợi ý: thêm JSON-LD Organization và WebSite cho trang chủ, Article cho bài viết, Product cho sản phẩm.",
     groups: {google: "Google", validators: "Trình kiểm tra", social: "Mạng xã hội", other: "Khác"},
-    queued: "Đang chờ trong hàng đợi", queuedAhead: n => `Đang chờ, còn ${n} audit phía trước`, running: "Đang audit toàn site…",
-    stages: ["Thu thập", "Quy tắc", "DataForSEO", "Jev", "PageSpeed", "Chấm điểm", "Báo cáo"],
-    auditOff: "Audit toàn site đang tắt. Bật tùy chọn “Audit toàn site” rồi phân tích lại.",
-    auditError: "Audit toàn site không chạy được", areas: "Điểm theo hạng mục", actions: "Việc cần làm", downloads: "Tải báo cáo",
-    pagesCrawled: n => `${n} URL đã thu thập`, capHit: "dừng ở giới hạn số trang, kết quả là mẫu", notAssessed: "chưa chấm",
-    impact: "Tác động", effort: "Công sức", count: "Số lượng", fix: "Cách sửa", evidence: "Bằng chứng", source: "Nguồn", pages: "Trang bị ảnh hưởng",
+    queued: "Đang chờ trong hàng đợi", queuedAhead: n => `Đang chờ, còn ${n} audit phía trước`, running: "Đang audit toàn site",
+    stepOf: (n, name) => `Bước ${n}/7 · ${name}`, closeNote: "Có thể đóng trang này. Mở lại cùng URL để chạy lại.",
+    stages: ["Thu thập", "Quy tắc", "DataForSEO", "Jev", "PageSpeed", "Chấm điểm", "Báo cáo"], skipNote: "bỏ qua",
+    auditOff: "Audit toàn site đang tắt. Bật “Audit toàn site” rồi phân tích lại.", auditError: "Audit toàn site không chạy được",
+    areas: n => `${n} hạng mục`, weightNote: "Trọng số trong ngoặc", downloads: "Tải báo cáo", dlPdf: "Gửi khách hàng", dlXlsx: "Theo dõi việc sửa", dlMd: "GitHub, Obsidian",
+    actionsTitle: n => `${n} việc cần làm`, actionsPending: "Việc cần làm", showMore: n => `Hiện thêm ${n} việc`, actionsWait: "Danh sách việc cần làm sẽ hiện khi audit xong.",
+    pagesCrawled: n => `${n} URL`, capHit: "Dừng ở giới hạn số trang, kết quả là mẫu.", notAssessed: "chưa chấm", passRules: n => `${n} quy tắc không phát hiện lỗi`,
+    impact: "Tác động", effort: "Công sức", fix: "Cách sửa", evidence: "Bằng chứng", source: "Nguồn", pages: "Trang",
     quickWin: "Làm nhanh", heuristic: "Kinh nghiệm", toVerify: "Cần kiểm tra lại", noActions: "Không có việc nào cần làm.",
-    progressLog: "Nhật ký", grade: g => `Hạng ${g}`, partial: "Audit một phần",
-    errInspect: "Không đọc được trang", errNetwork: "Không kết nối được tới server.",
-    passRules: n => `${n} quy tắc không phát hiện lỗi`,
+    progressLog: "Nhật ký", errInspect: "Không đọc được trang", errNetwork: "Không kết nối được tới server.",
   },
   en: {
-    heroTitle: "Check a website's SEO in one click",
-    heroSub: "Enter a URL: the page's meta tags, headings, images, links, social cards and schema are read at once and scored as a percentage, then the whole site is audited against 52 rules tied to Google Search Central.",
-    analyze: "Analyze", analyzing: "Analyzing…",
-    optAudit: "Full site audit", optPages: "Max pages", optPsi: "Measure Core Web Vitals (PageSpeed)",
-    pageScore: "This page", pageScoreSub: "On-page, 20 checks", siteScore: "Whole site", analyzed: "Analyzed page",
-    footer: "Jev SEO Check. Scores rank the work; they do not predict rankings or traffic.",
+    eyebrow: "SEO check · 52 rules tied to Google Search Central",
+    heroTitle: "How does your website score on SEO?",
+    heroSub: "Paste a URL. The page score shows in seconds, the whole-site score in 1 to 4 minutes, with fixes ranked by priority.",
+    analyze: "Analyze", analyzing: "Analyzing…", reanalyze: "Analyze again", installGuide: "Install guide",
+    optAudit: "Full site audit", optPages: "Pages", optPsi: "Measure Core Web Vitals", recent: "Recent",
+    sampleLabel: "Example · hatmoc.vn", pageScore: "This page", pageScoreSub: "20 on-page checks", gradeB: "Grade B",
+    s1k: "Step 1 · seconds", s1t: "Read the page you enter", s1d: "Meta tags, headings, images, links, Open Graph, schema, robots.txt and sitemap.",
+    s2k: "Step 2 · 1 to 4 minutes", s2t: "Audit the whole site", s2d: "Crawl up to 60 pages, score 9 areas, measure Core Web Vitals.",
+    s3k: "Step 3 · download", s3t: "PDF, Excel and Markdown reports", s3d: "Send to a client, track fixes, or publish on GitHub.",
+    footer: "Scores rank the work; they do not predict rankings or traffic.",
+    analyzedLabel: "Analyzed", pageCardLabel: "This page · 20 checks", siteCardLabel: n => `Whole site${n ? ` · ${n} URLs` : ""}`,
+    counts: (p, w, f) => `${p} passed · ${w} warnings · ${f} failed`, grade: g => `Grade ${g}`, partial: "Partial audit",
+    seeActions: n => `See ${n} actions →`,
     tabOverview: "Overview", tabSummary: "Summary", tabHeadings: "Headings", tabImages: "Images", tabLinks: "Links", tabSocial: "Social", tabSchema: "Schema", tabTools: "Tools", tabAudit: "Site audit",
-    checklist: "On-page checks", serp: "Google preview", passed: "passed", warned: "warnings", failed: "failed",
+    fixFirst: "Fix first", gain: x => `Fixing all adds <b>${x} points</b>`, passedTitle: "Passed", passedMeta: (n, s) => `${n} checks · ${s} / 100 points`, allPassed: "The page passes all 20 checks.",
+    serpTitle: "How it shows on Google", titleBar: (c, px) => `${c} chars · ~${px} / 600 px`, descBar: c => `${c} / 160 chars`, barNote: "Grey mark: 70 character minimum. Black mark: Google truncates.",
+    crawlTitle: "Crawling and indexing",
     title: "Title", description: "Description", keywords: "Keywords", url: "URL", canonical: "Canonical", robots: "Robots meta", xrobots: "X-Robots-Tag",
     author: "Author", publisher: "Publisher", lang: "Language", charset: "Charset", viewport: "Viewport", favicon: "Favicon", hreflang: "Hreflang",
     words: "Words", status: "HTTP status", ttfb: "Response time", size: "HTML size", redirects: "Redirects", generator: "Generator", server: "Server", themeColor: "Theme color",
     robotsTxt: "robots.txt", sitemap: "Sitemap", missing: "Missing", chars: "chars", selfCanon: "self-referencing", otherCanon: "points elsewhere", none: "None",
-    found: "found", notFound: "not found", urlsInSitemap: "URLs in sitemap", aiBots: "AI bots allowed",
-    headingCounts: "Counts", outline: "Heading outline", filterAll: "All",
+    found: "found", notFound: "not found", urlsInSitemap: "URLs in sitemap", aiBots: "AI bots allowed", robotsDefault: "index, follow (default)",
+    outline: "Heading outline", filterAll: "All", skipped: n => `${n} skipped levels`, emptyHeading: "(empty)",
     imgTotal: "Images", imgNoAlt: "Missing alt", imgEmptyAlt: "Empty alt", imgNoTitle: "Missing title", imgNoDim: "No dimensions",
     onlyMissingAlt: "Only missing alt", image: "Image", alt: "Alt", size2: "Size",
-    linkTotal: "Links", linkUnique: "Unique", internal: "Internal", external: "External", nofollow: "Nofollow", noTitle: "No title", emptyAnchor: "Empty anchor",
+    linkTotal: "Links", linkUnique: "Unique", internal: "Internal", external: "External", other: "Other", nofollow: "Nofollow", noTitle: "No title", emptyAnchor: "Empty anchor",
     anchor: "Anchor text", rel: "Rel", type: "Type", search: "Search…", exportCsv: "Download CSV", copy: "Copy", copied: "Copied",
     ogTags: "Open Graph tags", twTags: "Twitter tags", fbPreview: "Facebook preview", twPreview: "X (Twitter) preview", noImage: "No image",
     jsonld: "JSON-LD", valid: "valid", invalid: "syntax error", microdata: "Microdata", rdfa: "RDFa", noSchema: "No structured data on this page.",
+    schemaTip: "Tip: add Organization and WebSite JSON-LD on the homepage, Article on posts, Product on product pages.",
     groups: {google: "Google", validators: "Validators", social: "Social", other: "Other"},
-    queued: "Waiting in queue", queuedAhead: n => `Waiting, ${n} audits ahead`, running: "Auditing the whole site…",
-    stages: ["Crawl", "Rules", "DataForSEO", "Jev", "PageSpeed", "Scoring", "Reports"],
-    auditOff: "The site audit is off. Tick “Full site audit” and analyze again.",
-    auditError: "The site audit could not run", areas: "Score by area", actions: "Actions", downloads: "Download reports",
-    pagesCrawled: n => `${n} URLs crawled`, capHit: "stopped at the page cap, so results are a sample", notAssessed: "not assessed",
-    impact: "Impact", effort: "Effort", count: "Count", fix: "Fix", evidence: "Evidence", source: "Source", pages: "Affected pages",
+    queued: "Waiting in queue", queuedAhead: n => `Waiting, ${n} audits ahead`, running: "Auditing the whole site",
+    stepOf: (n, name) => `Step ${n}/7 · ${name}`, closeNote: "You can close this page. Open the same URL again to rerun.",
+    stages: ["Crawl", "Rules", "DataForSEO", "Jev", "PageSpeed", "Scoring", "Reports"], skipNote: "skipped",
+    auditOff: "The site audit is off. Tick “Full site audit” and analyze again.", auditError: "The site audit could not run",
+    areas: n => `${n} areas`, weightNote: "Weight in brackets", downloads: "Download reports", dlPdf: "For clients", dlXlsx: "Track fixes", dlMd: "GitHub, Obsidian",
+    actionsTitle: n => `${n} actions`, actionsPending: "Actions", showMore: n => `Show ${n} more`, actionsWait: "Actions appear when the audit finishes.",
+    pagesCrawled: n => `${n} URLs`, capHit: "Stopped at the page cap, so results are a sample.", notAssessed: "not assessed", passRules: n => `${n} rules found no issue`,
+    impact: "Impact", effort: "Effort", fix: "Fix", evidence: "Evidence", source: "Source", pages: "Pages",
     quickWin: "Quick win", heuristic: "Heuristic", toVerify: "To verify", noActions: "Nothing to fix.",
-    progressLog: "Log", grade: g => `Grade ${g}`, partial: "Partial audit",
-    errInspect: "Could not read the page", errNetwork: "Could not reach the server.",
-    passRules: n => `${n} rules found no issue`,
+    progressLog: "Log", errInspect: "Could not read the page", errNetwork: "Could not reach the server.",
   },
+};
+// What to do about each failed on-page check (ids from jevseo/meta.py): [vi, en].
+const HINT = {
+  status: ["Trang cần trả về HTTP 200. Kiểm tra chuyển hướng và lỗi máy chủ.", "The page should return HTTP 200. Check redirects and server errors."],
+  indexable: ["Bỏ noindex nếu trang cần xuất hiện trên Google.", "Remove noindex if the page should appear on Google."],
+  https: ["Cài chứng chỉ SSL và chuyển hướng vĩnh viễn HTTP sang HTTPS.", "Install a certificate and permanently redirect HTTP to HTTPS."],
+  title: ["Viết title riêng, nêu rõ trang cung cấp gì.", "Write a unique title that says what the page offers."],
+  title_length: ["Giữ title khoảng 30 đến 65 ký tự để không bị cắt.", "Keep the title around 30 to 65 characters so it is not cut."],
+  description: ["Viết đoạn tóm tắt riêng cho trang; Google thường dùng nó làm đoạn trích.", "Write a page-specific summary; Google often uses it as the snippet."],
+  description_length: ["Giữ description khoảng 70 đến 160 ký tự.", "Keep the description around 70 to 160 characters."],
+  h1: ["Mỗi trang đúng một H1 nêu chủ đề; các phần dùng H2 trở xuống.", "Use exactly one H1 naming the topic; sections use H2 and below."],
+  heading_order: ["Sắp tiêu đề theo thứ tự: H3 nằm dưới H2, không nhảy cấp.", "Nest headings in order: H3 under H2, no skipped levels."],
+  canonical: ["Thêm rel=canonical tự trỏ về chính trang này.", "Add a self-referencing rel=canonical."],
+  lang: ["Khai báo ngôn ngữ trên thẻ html, ví dụ lang=\"vi\".", "Declare the language on the html element, for example lang=\"en\"."],
+  viewport: ["Thêm <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">.", "Add <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">."],
+  charset: ["Thêm <meta charset=\"utf-8\"> ở đầu phần head.", "Add <meta charset=\"utf-8\"> at the top of the head."],
+  images_alt: ["Thêm alt mô tả cho ảnh mang thông tin; ảnh trang trí để alt rỗng.", "Describe informative images in alt; leave decorative ones empty."],
+  open_graph: ["Thêm og:title, og:description và og:image để link chia sẻ có ảnh xem trước.", "Add og:title, og:description and og:image for link previews."],
+  twitter_card: ["Thêm twitter:card, thường là summary_large_image.", "Add twitter:card, usually summary_large_image."],
+  structured_data: ["Thêm JSON-LD (Organization, WebSite, Article, Product…) hoặc sửa khối bị lỗi cú pháp.", "Add JSON-LD (Organization, WebSite, Article, Product…) or fix the block that fails to parse."],
+  favicon: ["Khai báo favicon; Google hiển thị nó cạnh kết quả tìm kiếm.", "Declare a favicon; Google shows it beside results."],
+  content: ["Bổ sung nội dung người đọc cần: câu trả lời, chi tiết, ví dụ, bước tiếp theo.", "Add what readers need: answers, specifics, examples, next steps."],
+  response_time: ["Dùng cache, CDN và giảm xử lý phía server.", "Use caching and a CDN and reduce server work."],
 };
 const store = {get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let lang = store.get("jevseo.lang") === "en" ? "en" : "vi";
@@ -337,33 +489,42 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeHref = u => /^https?:\/\//i.test(u || "") ? esc(u) : "#";
 const num = n => (n ?? 0).toLocaleString(lang === "vi" ? "vi-VN" : "en-US");
-const scoreColor = p => p >= 90 ? "var(--good)" : p >= 60 ? "var(--warn)" : "var(--bad)";
 const gradeOf = p => p >= 90 ? "A" : p >= 75 ? "B" : p >= 60 ? "C" : p >= 40 ? "D" : "F";
+const gcls = p => "g" + gradeOf(p).toLowerCase();
+const gvar = p => `var(--g-${gradeOf(p).toLowerCase()})`;
+const CHECK = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-const state = {meta: null, audit: null, auditId: null, auditError: null, auditOn: true, tab: "overview", poll: null, linkFilter: "all", linkQuery: "", imgMissing: false, hLevel: 0};
+const state = {meta: null, audit: null, auditId: null, auditError: null, auditOn: true, pages: 30, tab: "overview", poll: null, linkFilter: "all", linkQuery: "", imgMissing: false, hLevel: 0, pri: "all", showAll: false, openAct: null};
+
+function ruler(p){
+  const bands = [40, 20, 15, 15, 10].map(w => `<i style="width:${w}%"></i>`).join("");
+  const labels = [["F", "0", 40], ["D", "40", 20], ["C", "60", 15], ["B", "75", 15], ["A", "90", 10]].map(([g, n, w]) => `<span style="width:${w}%">${g}<em style="font-style:normal"> · ${n}</em></span>`).join("");
+  return `<div aria-hidden="true"><div class="ruler"><div class="bands">${bands}</div>${p == null ? "" : `<b style="left:${Math.max(0, Math.min(100, p))}%"></b>`}</div><div class="ruler-labels">${labels}</div></div>`;
+}
+const goLabel = () => `${esc(t("analyze"))} <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 function applyLang(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-t]").forEach(el => el.textContent = t(el.dataset.t));
   document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
-  if (!$("#go").disabled) $("#go").textContent = t("analyze");
+  if (!$("#go").disabled) $("#go").innerHTML = goLabel();
+  $("#sample-ruler").innerHTML = ruler(82);
+  const sample = lang === "vi" ? [["Trang không dùng HTTPS", "−5"], ["1/2 ảnh thiếu alt", "−6"], ["60 từ nội dung (nên từ 300)", "−5"]] : [["Not served over HTTPS", "−5"], ["1/2 images without alt", "−6"], ["60 words of content (300+ recommended)", "−5"]];
+  $("#sample-fixes").innerHTML = sample.map(([x, p]) => `<div class="fix" style="grid-template-columns:22px 1fr auto;align-items:center;padding:10px 0"><span class="mark fail" style="width:22px;height:22px;font-size:13px">×</span><span>${esc(x)}</span><span class="mono" style="color:var(--g-f)">${p}</span></div>`).join("");
+  recent();
   if (state.meta) render();
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => {lang = b.dataset.lang; store.set("jevseo.lang", lang); applyLang();}));
+document.querySelectorAll("[data-pages]").forEach(b => b.addEventListener("click", () => {state.pages = +b.dataset.pages; document.querySelectorAll("[data-pages]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));}));
 
-function showError(msg){const e = $("#error"); e.textContent = msg; e.hidden = !msg;}
-function setRing(el, p){
-  el.style.setProperty("--p", p ?? 0);
-  el.style.setProperty("--c", p == null ? "var(--line)" : scoreColor(p));
-  el.innerHTML = p == null ? "<b>–</b>" : `<b>${p}<small>%</small></b>`;
-}
+function showError(msg){ for (const id of ["#error", "#error2"]) { const e = $(id); e.textContent = msg; e.hidden = !msg; } }
 
 function recent(){
   const list = store.get("jevseo.recent") || [];
-  $("#recent").innerHTML = list.map(u => `<button type="button" data-u="${esc(u)}">${esc(u.replace(/^https?:\/\//, ""))}</button>`).join("");
-  $("#recent").querySelectorAll("button").forEach(b => b.onclick = () => {$("#url").value = b.dataset.u; run();});
+  $("#recent").innerHTML = list.length ? `<span>${esc(t("recent"))}</span>` + list.map(u => `<button type="button" data-u="${esc(u)}">${esc(u.replace(/^https?:\/\//, "").replace(/\/$/, ""))}</button>`).join("") : "";
+  $("#recent").querySelectorAll("button").forEach(b => b.onclick = () => {$("#url").value = b.dataset.u.replace(/^https?:\/\//, ""); run(b.dataset.u);});
 }
-function remember(u){const l = (store.get("jevseo.recent") || []).filter(x => x !== u); l.unshift(u); store.set("jevseo.recent", l.slice(0, 8)); recent();}
+function remember(u){const l = (store.get("jevseo.recent") || []).filter(x => x !== u); l.unshift(u); store.set("jevseo.recent", l.slice(0, 6));}
 
 async function api(path, body){
   const r = await fetch(path, body ? {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)} : {});
@@ -372,190 +533,217 @@ async function api(path, body){
   return data;
 }
 
-async function run(){
-  let url = $("#url").value.trim();
+async function run(raw){
+  let url = (raw || "").trim();
   if (!url) return;
   if (!/^https?:\/\//i.test(url)) url = "https://" + url;
   showError("");
   clearTimeout(state.poll);
-  Object.assign(state, {meta: null, audit: null, auditId: null, auditError: null, auditOn: $("#opt-audit").checked, tab: "overview", linkFilter: "all", linkQuery: "", imgMissing: false, hLevel: 0});
-  const go = $("#go"); go.disabled = true; go.innerHTML = `<span class="spinner"></span> ${esc(t("analyzing"))}`;
-  history.replaceState(null, "", "?url=" + encodeURIComponent(url));
-  const auditReq = state.auditOn ? api("/api/audits", {url, pages: +$("#opt-pages").value, pagespeed: $("#opt-psi").checked}).then(j => {state.auditId = j.id; state.audit = j; pollAudit();}).catch(e => {state.auditError = e.message; if (state.meta) render();}) : null;
+  Object.assign(state, {audit: null, auditId: null, auditError: null, auditOn: $("#opt-audit").checked, tab: "overview", linkFilter: "all", linkQuery: "", imgMissing: false, hLevel: 0, pri: "all", showAll: false, openAct: null});
+  const top = $("#topform button");
+  [$("#go"), top].forEach(b => {b.disabled = true; b.innerHTML = `<span class="spinner"></span> ${esc(t("analyzing"))}`;});
+  history.replaceState(null, "", "?url=" + encodeURIComponent(url.replace(/^https:\/\//, "")));
+  $("#url-top").value = url.replace(/^https:\/\//, "");
+  const auditReq = state.auditOn ? api("/api/audits", {url, pages: state.pages, pagespeed: $("#opt-psi").checked}).then(j => {state.auditId = j.id; state.audit = j; pollAudit();}).catch(e => {state.auditError = e.message; if (state.meta) render(true);}) : null;
   try {
     state.meta = await api("/api/inspect", {url});
     remember(url);
+    document.body.classList.add("has-results");
     $("#results").hidden = false;
     render();
+    window.scrollTo({top: 0});
   } catch (e) {
     showError(t("errInspect") + ": " + e.message);
   } finally {
-    go.disabled = false; go.textContent = t("analyze");
+    $("#go").disabled = false; $("#go").innerHTML = goLabel();
+    top.disabled = false; top.textContent = t("reanalyze");
   }
   await auditReq;
 }
-$("#form").addEventListener("submit", e => {e.preventDefault(); run();});
+$("#form").addEventListener("submit", e => {e.preventDefault(); run($("#url").value);});
+$("#topform").addEventListener("submit", e => {e.preventDefault(); run($("#url-top").value);});
 
 async function pollAudit(){
   if (!state.auditId) return;
-  try {
-    state.audit = await api("/api/audits/" + state.auditId);
-  } catch (e) { state.auditError = e.message; }
+  try { state.audit = await api("/api/audits/" + state.auditId); } catch (e) { state.auditError = e.message; }
   if (state.meta) render(true);
   if (state.audit && ["queued", "running"].includes(state.audit.status)) state.poll = setTimeout(pollAudit, 2000);
 }
 
 /* ---------- rendering ---------- */
 const TABS = [["overview","tabOverview"],["summary","tabSummary"],["headings","tabHeadings"],["images","tabImages"],["links","tabLinks"],["social","tabSocial"],["schema","tabSchema"],["tools","tabTools"],["audit","tabAudit"]];
+const earned = c => c.state === "pass" ? c.weight : c.state === "warn" ? c.weight / 2 : 0;
+const fmtPts = x => (Math.round(x * 10) / 10).toLocaleString(lang === "vi" ? "vi-VN" : "en-US");
 
 function render(fromPoll){
-  const m = state.meta;
-  setRing($("#ring-page"), m.score);
-  $("#page-grade").textContent = t("grade")(gradeOf(m.score));
-  renderSiteCard();
-  $("#final-url").textContent = m.summary.url;
+  const m = state.meta, s = m.summary;
   const c = m.checks.reduce((a, x) => (a[x.state]++, a), {pass: 0, warn: 0, fail: 0});
-  $("#id-chips").innerHTML = `<span class="chip ${m.summary.status === 200 ? "good" : "bad"}">HTTP ${esc(m.summary.status)}</span>
-    <span class="chip good">${c.pass} ${esc(t("passed"))}</span><span class="chip warn">${c.warn} ${esc(t("warned"))}</span><span class="chip bad">${c.fail} ${esc(t("failed"))}</span>
-    ${m.summary.lang ? `<span class="chip">${esc(m.summary.lang)}</span>` : ""}${m.summary.ttfb_ms != null ? `<span class="chip">${num(m.summary.ttfb_ms)} ms</span>` : ""}`;
-  const counts = {headings: m.headings.items.length, images: m.images.total, links: m.links.total, schema: m.schema.jsonld.length + m.schema.microdata.length};
+  $("#ident").innerHTML = `<span class="eyebrow">${esc(t("analyzedLabel"))}</span><span class="u">${esc(s.url)}</span>
+    <span class="badge mono ${s.status === 200 ? "ok" : "bad"}">HTTP ${esc(s.status)}</span>${s.lang ? `<span class="badge mono line">${esc(s.lang)}</span>` : ""}${s.ttfb_ms != null ? `<span class="badge mono line">TTFB ${num(s.ttfb_ms)} ms</span>` : ""}`;
+  $("#page-card").innerHTML = `<div class="card-head"><span class="eyebrow">${esc(t("pageCardLabel"))}</span><span class="muted" style="font-size:13px">${esc(t("counts")(c.pass, c.warn, c.fail))}</span></div>
+    <div class="big"><span class="num">${m.score}<small>%</small></span><span class="grade ${gcls(m.score)}">${esc(t("grade")(gradeOf(m.score)))}</span></div>${ruler(m.score)}`;
+  $("#site-card").innerHTML = siteCard();
+  $("#site-card").querySelectorAll("[data-goto]").forEach(b => b.onclick = () => {state.tab = b.dataset.goto; render(); $("#tabs").scrollIntoView({behavior: "smooth", block: "start"});});
+  const acts = state.audit && state.audit.result ? state.audit.result.actions.length : null;
+  const counts = {headings: m.headings.items.length, images: m.images.total, links: m.links.total, schema: m.schema.jsonld.length + m.schema.microdata.length, audit: acts};
   $("#tabs").innerHTML = TABS.map(([id, k]) => `<button role="tab" type="button" data-tab="${id}" aria-selected="${state.tab === id}">${esc(t(k))}${counts[id] != null ? `<span class="n">${counts[id]}</span>` : ""}</button>`).join("");
   $("#tabs").querySelectorAll("button").forEach(b => b.onclick = () => {state.tab = b.dataset.tab; render();});
   if (fromPoll && !["overview", "audit"].includes(state.tab)) return;  // keep filters and scroll on other tabs
+  const openLog = document.querySelector("#panel details.logbox[open]") != null;
+  const logEl = document.querySelector("#panel .log"), logAtEnd = !logEl || logEl.scrollTop + logEl.clientHeight >= logEl.scrollHeight - 8;
   const panel = {overview, summary, headings, images, links, social, schema, tools, audit}[state.tab];
   const active = document.activeElement && document.activeElement.id;
   $("#panel").innerHTML = panel();
+  if (openLog) { const d = document.querySelector("#panel details.logbox"); if (d) d.open = true; }
+  const lg = document.querySelector("#panel .log"); if (lg && logAtEnd) lg.scrollTop = lg.scrollHeight;
   bind();
-  if (active && document.getElementById(active)) { const el = document.getElementById(active); el.focus(); if (el.setSelectionRange && el.value) el.setSelectionRange(el.value.length, el.value.length); }
+  if (active === "link-q" && $("#link-q")) { const el = $("#link-q"); el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
 }
 
-function renderSiteCard(){
-  const a = state.audit, ring = $("#ring-site"), sub = $("#site-sub"), bar = $("#site-bar");
-  bar.hidden = true;
-  if (!state.auditOn) { setRing(ring, null); $("#site-grade").textContent = ""; sub.textContent = t("auditOff"); return; }
-  if (state.auditError || (a && a.status === "error")) { setRing(ring, null); $("#site-grade").textContent = t("auditError"); sub.textContent = state.auditError || (lang === "vi" ? a.error_vi || a.error : a.error); return; }
-  if (!a || a.status === "queued" || a.status === "running") {
-    setRing(ring, null);
-    $("#site-grade").innerHTML = `<span class="spinner"></span>`;
-    sub.textContent = !a ? t("queued") : a.status === "queued" ? (a.queue_position ? t("queuedAhead")(a.queue_position) : t("queued")) : `${t("running")} ${a.stage || 1}/7 · ${t("stages")[(a.stage || 1) - 1]}`;
-    bar.hidden = false; bar.querySelector("i").style.width = (a && a.status === "running" ? Math.max(4, ((a.stage || 1) - 0.5) / 7 * 100) : 2) + "%";
-    return;
+function auditState(){
+  const a = state.audit;
+  if (!state.auditOn) return "off";
+  if (state.auditError || (a && a.status === "error")) return "error";
+  return a && a.status === "done" && a.result ? "done" : "running";
+}
+const auditErr = () => state.auditError || (lang === "vi" ? state.audit.error_vi || state.audit.error : state.audit.error);
+const runLabel = a => !a || a.status === "queued" ? (a && a.queue_position ? t("queuedAhead")(a.queue_position) : t("queued")) : t("stepOf")(a.stage || 1, t("stages")[(a.stage || 1) - 1]);
+
+function steps(a){
+  const st = a && a.status === "running" ? (a.stage || 1) : 0;
+  return `<ol class="stepper">${t("stages").map((name, i) => {
+    const n = i + 1;
+    const skip = n === 3 || (n === 5 && a && a.pagespeed === false);  // the web app never runs DataForSEO
+    const cls = skip ? "skip" : n < st ? "done" : n === st ? "now" : "todo";
+    const mark = cls === "done" ? "✓" : cls === "skip" ? "–" : cls === "now" ? "•" : "";
+    return `<li class="${cls}"><span class="dot">${mark}</span><span>${esc(name)}</span><em>${skip ? esc(t("skipNote")) : ""}</em></li>`;
+  }).join("")}</ol>`;
+}
+function elapsed(a){ if (!a || !a.created) return ""; const s = Math.max(0, Math.round(Date.now() / 1000 - a.created)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; }
+
+function siteCard(){
+  const a = state.audit, st = auditState();
+  if (st === "off") return `<div class="card-head"><span class="eyebrow">${esc(t("siteCardLabel")(0))}</span></div><p class="muted" style="margin:0">${esc(t("auditOff"))}</p>`;
+  if (st === "error") return `<div class="card-head"><span class="eyebrow">${esc(t("siteCardLabel")(0))}</span></div><div class="alert">${esc(t("auditError"))}: ${esc(auditErr())}</div>`;
+  if (st === "running") {
+    const pct = a && a.status === "running" ? Math.max(4, ((a.stage || 1) - 0.5) / 7 * 100) : 2;
+    return `<div class="card-head"><span class="eyebrow">${esc(t("siteCardLabel")(0))}</span><span class="mono muted">${elapsed(a)}</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span class="spinner" style="color:var(--accent)"></span><b style="font-family:var(--display);font-size:22px">${esc(t("running"))}</b></div>
+      <span class="muted" style="font-size:14px">${esc(runLabel(a))}</span>
+      <div class="cat"><div class="track"><i style="width:${pct}%;background:var(--accent);transition:width .4s"></i></div></div>`;
   }
   const r = a.result;
-  if (!r) return;
-  setRing(ring, r.overall);
-  $("#site-grade").textContent = t("grade")(r.grade) + (r.partial.length ? " · " + t("partial") : "");
-  sub.textContent = t("pagesCrawled")(r.pages_crawled);
+  return `<div class="card-head"><span class="eyebrow">${esc(t("siteCardLabel")(r.pages_crawled))}</span>${r.partial.length ? `<span class="badge warn">${esc(t("partial"))}</span>` : ""}</div>
+    <div class="big"><span class="num">${r.overall}<small>%</small></span><span class="grade ${gcls(r.overall)}">${esc(t("grade")(r.grade))}</span>
+    <button type="button" class="linkline" data-goto="audit">${esc(t("seeActions")(r.actions.length))}</button></div>${ruler(r.overall)}`;
 }
 
-function lenChip(n, lo, hi){ if (!n) return `<span class="chip bad len">0 ${esc(t("chars"))}</span>`; return `<span class="chip ${n >= lo && n <= hi ? "good" : "warn"} len">${n} ${esc(t("chars"))}</span>`; }
-const val = (v, mono) => v ? `<span class="val${mono ? " mono" : ""}">${esc(v)}</span>` : `<span class="empty">${esc(t("missing"))}</span>`;
-const link = u => u ? `<a href="${safeHref(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>` : `<span class="empty">${esc(t("missing"))}</span>`;
-
-function serpPreview(){
+function serpBlock(){
   const s = state.meta.summary;
-  let u; try { u = new URL(s.url); } catch (e) { u = {hostname: s.url, pathname: ""}; }
+  let u; try { u = new URL(s.url); } catch (e) { u = {hostname: s.url}; }
   const title = s.title || u.hostname, desc = s.description || "";
   const cut = (x, n) => x.length > n ? x.slice(0, n - 1).trimEnd() + "…" : x;
-  return `<div class="serp"><div class="site">${s.favicon ? `<img src="${safeHref(s.favicon)}" alt="" loading="lazy">` : ""}<div><div class="url">${esc(u.hostname)}</div><div class="muted" style="font-size:.76rem">${esc(s.url)}</div></div></div>
-    <div class="t">${esc(cut(title, 62))}</div><div class="d">${esc(cut(desc, 158)) || `<span class="empty">${esc(t("missing"))}: meta description</span>`}</div></div>`;
+  const name = state.meta.social.og["og:site_name"] || u.hostname.replace(/^www\./, "");
+  let px;
+  try { const ctx = document.createElement("canvas").getContext("2d"); ctx.font = "20px Arial"; px = Math.round(ctx.measureText(s.title || "").width); } catch (e) { px = Math.round((s.title || "").length * 9.2); }
+  const tl = (s.title || "").length, dl = desc.length;
+  const tColor = !tl ? "var(--g-f)" : px > 600 ? "var(--g-c)" : "var(--g-a)";
+  const dColor = !dl ? "var(--g-f)" : dl < 70 || dl > 160 ? "var(--g-c)" : "var(--g-a)";
+  return `<div class="serp"><div class="site"><span class="fav">${s.favicon ? `<img src="${safeHref(s.favicon)}" alt="" loading="lazy" onerror="this.remove()">` : esc(name.slice(0, 1).toUpperCase())}</span>
+      <div style="display:flex;flex-direction:column;min-width:0"><span class="name">${esc(name)}</span><span class="url">${esc(s.url)}</span></div></div>
+      <span class="t">${esc(cut(title, 70))}</span><span class="d">${esc(cut(desc, 160)) || `<span class="miss">${esc(t("missing"))}: meta description</span>`}</span></div>
+    <div class="meter"><div class="row"><b>${esc(t("title"))}</b><span>${esc(t("titleBar")(tl, px))}</span></div><div class="bar"><i style="width:${Math.min(100, px / 6)}%;background:${tColor}"></i><s style="left:100%"></s></div></div>
+    <div class="meter"><div class="row"><b>${esc(t("description"))}</b><span>${esc(t("descBar")(dl))}</span></div><div class="bar"><i style="width:${Math.min(100, dl / 1.6)}%;background:${dColor}"></i><s class="min" style="left:43.75%"></s><s style="left:100%"></s></div><small>${esc(t("barNote"))}</small></div>`;
 }
 
 function overview(){
   const m = state.meta;
-  const order = {fail: 0, warn: 1, pass: 2};
-  const items = [...m.checks].sort((a, b) => order[a.state] - order[b.state] || b.weight - a.weight);
-  return `<div class="grid2">
-    <div class="box"><h2>${esc(t("checklist"))} <span class="chip acc">${m.score}%</span></h2><ul class="checks">
-      ${items.map(c => `<li><span class="dot ${c.state}">${c.state === "pass" ? "✓" : c.state === "warn" ? "!" : "×"}</span><span>${esc(c[lang])}</span><span class="w">${c.state === "pass" ? c.weight : c.state === "warn" ? c.weight / 2 : 0}/${c.weight}</span></li>`).join("")}
-    </ul></div>
+  const bad = m.checks.filter(c => c.state !== "pass").sort((a, b) => (b.weight - earned(b)) - (a.weight - earned(a)));
+  const good = m.checks.filter(c => c.state === "pass");
+  const gain = bad.reduce((x, c) => x + c.weight - earned(c), 0);
+  const total = m.checks.reduce((x, c) => x + earned(c), 0);
+  return `<div class="cols">
     <div class="stack">
-      <div class="box"><h2>${esc(t("serp"))}</h2>${serpPreview()}</div>
-      ${state.auditOn ? `<div class="box"><h2>${esc(t("siteScore"))} <button class="btn" type="button" data-goto="audit">${esc(t("tabAudit"))} →</button></h2>${auditMini()}</div>` : ""}
-      <div class="box"><h2>${esc(t("robotsTxt"))} · ${esc(t("sitemap"))}</h2>${robotsBlock()}</div>
+      <div class="card" style="gap:4px"><div class="card-head" style="margin-bottom:12px"><h2 class="h2">${esc(t("fixFirst"))}</h2>${bad.length ? `<span class="muted" style="font-size:14px">${t("gain")(esc(fmtPts(gain)))}</span>` : ""}</div>
+        <div class="fixes">${bad.map(c => `<div class="fix"><span class="mark ${c.state}">${c.state === "fail" ? "×" : "!"}</span><div><b>${esc(c[lang])}</b><p>${esc((HINT[c.id] || [])[lang === "vi" ? 0 : 1] || "")}</p></div><span class="pts">+${esc(fmtPts(c.weight - earned(c)))}</span></div>`).join("") || `<p class="empty-ok" style="margin:0">${esc(t("allPassed"))}</p>`}</div></div>
+      <div class="card"><div class="card-head"><h2 class="h2">${esc(t("passedTitle"))}</h2><span class="muted" style="font-size:14px">${esc(t("passedMeta")(good.length, fmtPts(total)))}</span></div>
+        <div class="passed">${good.map(c => `<span>${CHECK}${esc(c[lang])}</span>`).join("")}</div></div>
+    </div>
+    <div class="stack">
+      <div class="card"><h2 class="h2">${esc(t("serpTitle"))}</h2>${serpBlock()}</div>
+      <div class="card" style="gap:4px"><h2 class="h2" style="margin-bottom:10px">${esc(t("crawlTitle"))}</h2>${crawlBlock()}</div>
     </div></div>`;
 }
 
-function auditMini(){
-  const a = state.audit;
-  if (state.auditError || (a && a.status === "error")) return `<div class="note">${esc(t("auditError"))}: ${esc(state.auditError || (lang === "vi" ? a.error_vi || a.error : a.error))}</div>`;
-  if (!a || !a.result) return stagesBar(a) ;
-  return catBars(a.result.categories.slice(0, 9));
-}
-
-function stagesBar(a){
-  const st = a && a.status === "running" ? (a.stage || 1) : 0;
-  return `<ol class="stages">${t("stages").map((n, i) => `<li class="${i + 1 < st || (a && a.status === "done") ? "done" : i + 1 === st ? "now" : ""}"><i></i><span>${esc(n)}</span></li>`).join("")}</ol>
-    <div class="muted" style="font-size:.84rem"><span class="spinner"></span> ${esc(!a || a.status === "queued" ? t("queued") : t("running"))}</div>`;
-}
-
-function catBars(cats){
-  return `<div class="cats">${cats.map(c => `<div class="cat"><span>${esc(lang === "vi" ? c.name_vi : c.name)}</span><b>${c.score == null ? `<span class="muted" style="font-weight:500;font-size:.78rem">${esc(t("notAssessed"))}</span>` : c.score + "%"}</b>
-    <div class="track"><i style="width:${c.score ?? 0}%;background:${c.score == null ? "var(--line)" : scoreColor(c.score)}"></i></div></div>`).join("")}</div>`;
-}
-
-function robotsBlock(){
-  const r = state.meta.robots_txt || {}, sm = state.meta.sitemap || {};
+const link = u => u ? `<a href="${safeHref(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>` : `<span class="miss">${esc(t("missing"))}</span>`;
+const none = () => `<span class="muted">${esc(t("none"))}</span>`;
+function crawlBlock(){
+  const s = state.meta.summary, r = state.meta.robots_txt || {}, sm = state.meta.sitemap || {};
   const ai = Object.entries(r.ai_bots || {});
   return `<div class="kv">
-    <div>${esc(t("robotsTxt"))}</div><div>${r.present ? `<span class="chip good">${esc(t("found"))}</span>` : `<span class="chip bad">${esc(t("notFound"))}</span>`} ${link(r.url)}${r.disallow_all ? ` <span class="chip bad">Disallow: /</span>` : ""}</div>
-    <div>${esc(t("sitemap"))}</div><div>${(sm.files || []).length ? sm.files.map(f => `<div>${f.error ? `<span class="chip bad">${esc(f.error)}</span>` : `<span class="chip good">${num(f.urls || f.children || 0)}</span>`} ${link(f.url)}</div>`).join("") : `<span class="empty">${esc(t("missing"))}</span>`}</div>
-    <div>${esc(t("urlsInSitemap"))}</div><div class="val">${num(sm.total_urls)}</div>
-    ${ai.length ? `<div>${esc(t("aiBots"))}</div><div class="chips" style="display:flex;flex-wrap:wrap;gap:4px">${ai.map(([b, ok]) => `<span class="chip ${ok ? "good" : "bad"}">${esc(b)}</span>`).join("")}</div>` : ""}
+    <span>${esc(t("canonical"))}</span><span class="v mono">${s.canonical ? `${link(s.canonical)} <span class="badge ${s.canonical_self ? "ok" : "warn"}">${esc(t(s.canonical_self ? "selfCanon" : "otherCanon"))}</span>` : `<span class="miss">${esc(t("missing"))}</span>`}</span>
+    <span>${esc(t("robots"))}</span><span class="v mono">${esc(s.robots || t("robotsDefault"))}</span>
+    <span>${esc(t("robotsTxt"))}</span><span class="v">${r.present ? `<span class="badge ok">${esc(t("found"))}</span>` : `<span class="badge bad">${esc(t("notFound"))}</span>`} ${r.url ? link(r.url) : ""}${r.disallow_all ? ` <span class="badge bad">Disallow: /</span>` : ""}</span>
+    <span>${esc(t("sitemap"))}</span><span class="v">${(sm.files || []).length ? sm.files.map(f => `<div>${f.error ? `<span class="badge bad">${esc(f.error)}</span>` : `<span class="badge ok">${num(f.urls || f.children || 0)}</span>`} ${link(f.url)}</div>`).join("") : `<span class="miss">${esc(t("missing"))}</span>`}</span>
+    <span>${esc(t("urlsInSitemap"))}</span><span class="v mono">${num(sm.total_urls)}</span>
+    ${ai.length ? `<span>${esc(t("aiBots"))}</span><span class="v chips">${ai.map(([b, ok]) => `<span class="badge ${ok ? "ok" : "bad"}">${esc(b)}</span>`).join("")}</span>` : ""}
   </div>`;
 }
 
+function lenBadge(n, lo, hi){ return `<span class="badge len ${!n ? "bad" : n >= lo && n <= hi ? "ok" : "warn"}">${n} ${esc(t("chars"))}</span>`; }
+const val = (v, mono) => v ? `<span class="v${mono ? " mono" : ""}">${esc(v)}</span>` : `<span class="miss">${esc(t("missing"))}</span>`;
+
 function summary(){
   const s = state.meta.summary;
-  const canon = s.canonical ? `${link(s.canonical)} <span class="chip ${s.canonical_self ? "good" : "warn"}">${esc(t(s.canonical_self ? "selfCanon" : "otherCanon"))}</span>` : `<span class="empty">${esc(t("missing"))}</span>`;
+  const copyBtn = v => v ? ` <button class="btn" type="button" data-copy="${esc(v)}" style="min-height:30px;padding:3px 10px;font-size:12px">${esc(t("copy"))}</button>` : "";
   const rows = [
-    ["title", `${val(s.title)}${lenChip((s.title || "").length, 30, 65)} ${s.title ? `<button class="btn" type="button" data-copy="${esc(s.title)}">${esc(t("copy"))}</button>` : ""}`],
-    ["description", `${val(s.description)}${lenChip((s.description || "").length, 70, 160)} ${s.description ? `<button class="btn" type="button" data-copy="${esc(s.description)}">${esc(t("copy"))}</button>` : ""}`],
-    ["url", `${link(s.url)} ${lenChip(s.url.length, 1, 115)}`],
-    ["canonical", canon],
-    ["redirects", s.redirects.length ? s.redirects.map(r => `<div class="mono">${esc(r.status)} ${esc(r.url)}</div>`).join("") : `<span class="muted">${esc(t("none"))}</span>`],
-    ["status", `<span class="chip ${s.status === 200 ? "good" : "bad"}">${esc(s.status)}</span>`],
-    ["robots", val(s.robots || (lang === "vi" ? "index, follow (mặc định)" : "index, follow (default)"))],
-    ["xrobots", s.x_robots_tag ? val(s.x_robots_tag, true) : `<span class="muted">${esc(t("none"))}</span>`],
-    ["keywords", s.keywords ? val(s.keywords) : `<span class="muted">${esc(t("none"))}</span>`],
+    ["title", `${val(s.title)}${lenBadge((s.title || "").length, 30, 65)}${copyBtn(s.title)}`],
+    ["description", `${val(s.description)}${lenBadge((s.description || "").length, 70, 160)}${copyBtn(s.description)}`],
+    ["url", `${link(s.url)} ${lenBadge(s.url.length, 1, 115)}`],
+    ["canonical", s.canonical ? `${link(s.canonical)} <span class="badge ${s.canonical_self ? "ok" : "warn"}">${esc(t(s.canonical_self ? "selfCanon" : "otherCanon"))}</span>` : `<span class="miss">${esc(t("missing"))}</span>`],
+    ["redirects", s.redirects.length ? s.redirects.map(r => `<div class="mono">${esc(r.status)} ${esc(r.url)}</div>`).join("") : none()],
+    ["status", `<span class="badge mono ${s.status === 200 ? "ok" : "bad"}">${esc(s.status)}</span>`],
+    ["robots", val(s.robots || t("robotsDefault"), true)],
+    ["xrobots", s.x_robots_tag ? val(s.x_robots_tag, true) : none()],
+    ["keywords", s.keywords ? val(s.keywords) : none()],
     ["lang", val(s.lang, true)], ["charset", val(s.charset, true)], ["viewport", val(s.viewport, true)],
-    ["words", `<span class="val">${num(s.word_count)}</span>`],
-    ["ttfb", `<span class="val">${s.ttfb_ms != null ? num(s.ttfb_ms) + " ms" : "–"}</span>`], ["size", `<span class="val">${num(Math.round(s.bytes / 1024))} KB</span>`],
-    ["author", s.author ? val(s.author) : `<span class="muted">${esc(t("none"))}</span>`], ["publisher", s.publisher ? link(s.publisher) : `<span class="muted">${esc(t("none"))}</span>`],
-    ["favicon", s.favicon ? `<img src="${safeHref(s.favicon)}" alt="" width="16" height="16" style="vertical-align:-3px"> ${link(s.favicon)}` : `<span class="empty">${esc(t("missing"))}</span>`],
-    ["hreflang", s.hreflang.length ? s.hreflang.map(h => `<div><span class="chip">${esc(h.lang)}</span> ${link(h.href)}</div>`).join("") : `<span class="muted">${esc(t("none"))}</span>`],
-    ["generator", s.generator ? val(s.generator) : `<span class="muted">${esc(t("none"))}</span>`], ["server", s.server ? val(s.server, true) : `<span class="muted">${esc(t("none"))}</span>`],
-    ["themeColor", s.theme_color ? `<span class="val mono"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;background:${/^#[0-9a-f]{3,8}$/i.test(s.theme_color) ? s.theme_color : "transparent"}"></span> ${esc(s.theme_color)}</span>` : `<span class="muted">${esc(t("none"))}</span>`],
+    ["words", `<span class="v mono">${num(s.word_count)}</span>`],
+    ["ttfb", `<span class="v mono">${s.ttfb_ms != null ? num(s.ttfb_ms) + " ms" : "–"}</span>`], ["size", `<span class="v mono">${num(Math.round(s.bytes / 1024))} KB</span>`],
+    ["author", s.author ? val(s.author) : none()], ["publisher", s.publisher ? link(s.publisher) : none()],
+    ["favicon", s.favicon ? `<img src="${safeHref(s.favicon)}" alt="" width="16" height="16" style="vertical-align:-3px"> ${link(s.favicon)}` : `<span class="miss">${esc(t("missing"))}</span>`],
+    ["hreflang", s.hreflang.length ? s.hreflang.map(h => `<div><span class="badge mono">${esc(h.lang)}</span> ${link(h.href)}</div>`).join("") : none()],
+    ["generator", s.generator ? val(s.generator) : none()], ["server", s.server ? val(s.server, true) : none()],
+    ["themeColor", s.theme_color ? `<span class="v mono"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;border:1px solid var(--line);background:${/^#[0-9a-f]{3,8}$/i.test(s.theme_color) ? s.theme_color : "transparent"}"></span> ${esc(s.theme_color)}</span>` : none()],
   ];
-  return `<div class="grid2"><div class="box"><div class="kv">${rows.map(([k, v]) => `<div>${esc(t(k))}</div><div>${v}</div>`).join("")}</div></div>
-    <div class="stack"><div class="box"><h2>${esc(t("serp"))}</h2>${serpPreview()}</div><div class="box"><h2>${esc(t("robotsTxt"))} · ${esc(t("sitemap"))}</h2>${robotsBlock()}</div></div></div>`;
+  return `<div class="cols"><div class="card" style="gap:0"><div class="kv">${rows.map(([k, v]) => `<span>${esc(t(k))}</span><span class="v">${v}</span>`).join("")}</div></div>
+    <div class="stack"><div class="card"><h2 class="h2">${esc(t("serpTitle"))}</h2>${serpBlock()}</div><div class="card" style="gap:4px"><h2 class="h2" style="margin-bottom:10px">${esc(t("crawlTitle"))}</h2>${crawlBlock()}</div></div></div>`;
 }
 
 function headings(){
   const h = state.meta.headings;
   const items = h.items.filter(x => !state.hLevel || x.level === state.hLevel);
-  return `<div class="tiles">${[1, 2, 3, 4, 5, 6].map(i => `<div class="tile ${i === 1 && h.counts.h1 !== 1 ? (h.counts.h1 ? "warn" : "bad") : ""}"><b>${h.counts["h" + i]}</b><span>H${i}</span></div>`).join("")}</div>
-    <div class="box"><h2>${esc(t("outline"))} ${h.skips ? `<span class="chip warn">${esc(lang === "vi" ? `bỏ qua cấp ${h.skips} lần` : `${h.skips} skipped levels`)}</span>` : ""}</h2>
+  return `<div class="stack"><div class="tiles">${[1, 2, 3, 4, 5, 6].map(i => `<div class="tile ${i === 1 && h.counts.h1 !== 1 ? (h.counts.h1 ? "warn" : "bad") : ""}"><b>${h.counts["h" + i]}</b><span>H${i}</span></div>`).join("")}</div>
+    <div class="card"><div class="card-head"><h2 class="h2">${esc(t("outline"))}</h2>${h.skips ? `<span class="badge warn">${esc(t("skipped")(h.skips))}</span>` : ""}</div>
     <div class="toolbar"><button class="btn" type="button" data-hl="0" aria-pressed="${!state.hLevel}">${esc(t("filterAll"))}</button>${[1, 2, 3, 4, 5, 6].map(i => `<button class="btn" type="button" data-hl="${i}" aria-pressed="${state.hLevel === i}">H${i}</button>`).join("")}
-      <button class="btn" type="button" data-csv="headings">${esc(t("exportCsv"))}</button></div>
-    <ul class="outline">${items.map(x => `<li style="padding-left:${state.hLevel ? 0 : (x.level - 1) * 18}px"><span class="lv h${x.level}">H${x.level}</span><span>${esc(x.text) || `<span class="empty">(${esc(lang === "vi" ? "rỗng" : "empty")})</span>`}</span></li>`).join("") || `<li class="muted">${esc(t("none"))}</li>`}</ul></div>`;
+      <button class="btn" type="button" data-csv="headings" style="margin-left:auto">${esc(t("exportCsv"))}</button></div>
+    <ul class="outline">${items.map(x => `<li style="padding-left:${state.hLevel ? 0 : (x.level - 1) * 20}px"><span class="lv h${x.level}">H${x.level}</span><span>${esc(x.text) || `<span class="miss">${esc(t("emptyHeading"))}</span>`}</span></li>`).join("") || `<li class="muted">${esc(t("none"))}</li>`}</ul></div></div>`;
 }
 
 function images(){
   const im = state.meta.images;
   const items = im.items.filter(i => !state.imgMissing || i.alt == null);
-  return `<div class="tiles">
+  return `<div class="stack"><div class="tiles">
     <div class="tile"><b>${num(im.total)}</b><span>${esc(t("imgTotal"))}</span></div>
     <div class="tile ${im.missing_alt ? "bad" : ""}"><b>${num(im.missing_alt)}</b><span>${esc(t("imgNoAlt"))}</span></div>
     <div class="tile"><b>${num(im.empty_alt)}</b><span>${esc(t("imgEmptyAlt"))}</span></div>
     <div class="tile"><b>${num(im.missing_title)}</b><span>${esc(t("imgNoTitle"))}</span></div>
     <div class="tile ${im.no_dimensions ? "warn" : ""}"><b>${num(im.no_dimensions)}</b><span>${esc(t("imgNoDim"))}</span></div></div>
-    <div class="toolbar"><button class="btn" type="button" data-imgmissing aria-pressed="${state.imgMissing}">${esc(t("onlyMissingAlt"))}</button><button class="btn" type="button" data-csv="images">${esc(t("exportCsv"))}</button></div>
+    <div class="toolbar"><button class="btn" type="button" data-imgmissing aria-pressed="${state.imgMissing}">${esc(t("onlyMissingAlt"))}</button><button class="btn" type="button" data-csv="images" style="margin-left:auto">${esc(t("exportCsv"))}</button></div>
     <div class="tw"><table><thead><tr><th>${esc(t("image"))}</th><th>${esc(t("alt"))}</th><th>Title</th><th>${esc(t("size2"))}</th><th>URL</th></tr></thead><tbody>
     ${items.map(i => `<tr><td>${/^https?:/i.test(i.src) ? `<img class="thumb" src="${safeHref(i.src)}" alt="" loading="lazy">` : ""}</td>
-      <td>${i.alt == null ? `<span class="chip bad">${esc(t("missing"))}</span>` : i.alt.trim() ? esc(i.alt) : `<span class="chip">${esc(t("imgEmptyAlt"))}</span>`}</td>
-      <td>${i.title ? esc(i.title) : `<span class="muted">–</span>`}</td><td class="mono">${i.width && i.height ? esc(i.width + "×" + i.height) : `<span class="chip warn">?</span>`}</td><td>${link(i.src)}</td></tr>`).join("") || `<tr><td colspan="5" class="muted">${esc(t("none"))}</td></tr>`}
-    </tbody></table></div>`;
+      <td>${i.alt == null ? `<span class="badge bad">${esc(t("missing"))}</span>` : i.alt.trim() ? esc(i.alt) : `<span class="badge">${esc(t("imgEmptyAlt"))}</span>`}</td>
+      <td>${i.title ? esc(i.title) : `<span class="muted">–</span>`}</td><td class="mono">${i.width && i.height ? esc(i.width + "×" + i.height) : `<span class="badge warn">?</span>`}</td><td>${link(i.src)}</td></tr>`).join("") || `<tr><td colspan="5" class="muted">${esc(t("none"))}</td></tr>`}
+    </tbody></table></div></div>`;
 }
 
 function filteredLinks(){
@@ -565,70 +753,86 @@ function filteredLinks(){
 
 function links(){
   const L = state.meta.links, items = filteredLinks();
-  const f = (id, k, n) => `<button class="btn" type="button" data-lf="${id}" aria-pressed="${state.linkFilter === id}">${esc(t(k))} <span class="muted">${num(n)}</span></button>`;
-  return `<div class="tiles">
+  const f = (id, k, n) => `<button class="btn" type="button" data-lf="${id}" aria-pressed="${state.linkFilter === id}">${esc(t(k))}<span class="c">${num(n)}</span></button>`;
+  return `<div class="stack"><div class="tiles">
     <div class="tile"><b>${num(L.total)}</b><span>${esc(t("linkTotal"))}</span></div><div class="tile"><b>${num(L.unique)}</b><span>${esc(t("linkUnique"))}</span></div>
     <div class="tile"><b>${num(L.internal)}</b><span>${esc(t("internal"))}</span></div><div class="tile"><b>${num(L.external)}</b><span>${esc(t("external"))}</span></div>
     <div class="tile"><b>${num(L.nofollow)}</b><span>${esc(t("nofollow"))}</span></div><div class="tile"><b>${num(L.missing_title)}</b><span>${esc(t("noTitle"))}</span></div>
     <div class="tile ${L.empty_anchor ? "warn" : ""}"><b>${num(L.empty_anchor)}</b><span>${esc(t("emptyAnchor"))}</span></div></div>
     <div class="toolbar">${f("all", "filterAll", L.total)}${f("internal", "internal", L.internal)}${f("external", "external", L.external)}${f("nofollow", "nofollow", L.nofollow)}
-      <input type="search" id="link-q" placeholder="${esc(t("search"))}" value="${esc(state.linkQuery)}"><button class="btn" type="button" data-csv="links">${esc(t("exportCsv"))}</button></div>
+      <input type="search" id="link-q" placeholder="${esc(t("search"))}" value="${esc(state.linkQuery)}" aria-label="${esc(t("search"))}"><button class="btn" type="button" data-csv="links">${esc(t("exportCsv"))}</button></div>
     <div class="tw"><table><thead><tr><th>#</th><th>${esc(t("anchor"))}</th><th>URL</th><th>${esc(t("type"))}</th><th>${esc(t("rel"))}</th><th>Title</th></tr></thead><tbody>
-    ${items.map((l, i) => `<tr><td class="num">${i + 1}</td><td>${l.anchor ? esc(l.anchor) : `<span class="chip warn">${esc(t("emptyAnchor"))}</span>`}</td><td>${link(l.href)}</td>
-      <td><span class="chip ${l.kind === "internal" ? "acc" : ""}">${esc(l.kind === "other" ? "other" : t(l.kind))}</span></td><td class="mono">${esc(l.rel) || "–"}</td><td>${l.title ? esc(l.title) : "–"}</td></tr>`).join("") || `<tr><td colspan="6" class="muted">${esc(t("none"))}</td></tr>`}
-    </tbody></table></div>`;
+    ${items.map((l, i) => `<tr><td class="num">${i + 1}</td><td>${l.anchor ? esc(l.anchor) : `<span class="badge warn">${esc(t("emptyAnchor"))}</span>`}</td><td>${link(l.href)}</td>
+      <td><span class="badge ${l.kind === "internal" ? "ok" : ""}">${esc(t(l.kind))}</span></td><td class="mono">${esc(l.rel) || "–"}</td><td>${l.title ? esc(l.title) : "–"}</td></tr>`).join("") || `<tr><td colspan="6" class="muted">${esc(t("none"))}</td></tr>`}
+    </tbody></table></div></div>`;
 }
 
 function social(){
   const {og, twitter} = state.meta.social, s = state.meta.summary;
   let host = ""; try { host = new URL(s.url).hostname; } catch (e) {}
-  const img = og["og:image"] || twitter["twitter:image"] || twitter["twitter:image:src"];
-  const card = (title, desc, im) => `<div class="card-prev"><div class="img" ${im && /^https?:/i.test(im) ? `style="background-image:url('${esc(im).replace(/'/g, "%27")}')"` : ""}>${im ? "" : esc(t("noImage"))}</div>
+  const card = (title, desc, im) => `<div class="cardprev"><div class="img" ${im && /^https?:/i.test(im) ? `style="background-image:url('${esc(im).replace(/'/g, "%27")}')"` : ""}>${im ? "" : esc(t("noImage"))}</div>
     <div class="body"><div class="dom">${esc(host)}</div><div class="ct">${esc(title || s.title || host)}</div><div class="cd">${esc(desc || s.description || "")}</div></div></div>`;
-  const table = obj => { const e = Object.entries(obj); return e.length ? `<div class="kv">${e.map(([k, v]) => `<div class="mono">${esc(k)}</div><div class="val">${/^https?:/i.test(v) ? link(v) : esc(v) || `<span class="empty">${esc(t("missing"))}</span>`}</div>`).join("")}</div>` : `<div class="empty">${esc(t("missing"))}</div>`; };
-  return `<div class="grid2"><div class="stack"><div class="box"><h2>${esc(t("ogTags"))}</h2>${table(og)}</div><div class="box"><h2>${esc(t("twTags"))}</h2>${table(twitter)}</div></div>
-    <div class="stack"><div class="box"><h2>${esc(t("fbPreview"))}</h2>${card(og["og:title"], og["og:description"], og["og:image"])}</div>
-    <div class="box"><h2>${esc(t("twPreview"))}</h2>${card(twitter["twitter:title"] || og["og:title"], twitter["twitter:description"] || og["og:description"], twitter["twitter:image"] || twitter["twitter:image:src"] || og["og:image"])}</div></div></div>`;
+  const table = obj => { const e = Object.entries(obj); return e.length ? `<div class="kv">${e.map(([k, v]) => `<span class="mono">${esc(k)}</span><span class="v">${/^https?:/i.test(v) ? link(v) : esc(v) || `<span class="miss">${esc(t("missing"))}</span>`}</span>`).join("")}</div>` : `<span class="miss">${esc(t("missing"))}</span>`; };
+  return `<div class="cols"><div class="stack"><div class="card" style="gap:6px"><h2 class="h2" style="margin-bottom:8px">${esc(t("ogTags"))}</h2>${table(og)}</div><div class="card" style="gap:6px"><h2 class="h2" style="margin-bottom:8px">${esc(t("twTags"))}</h2>${table(twitter)}</div></div>
+    <div class="stack"><div class="card"><h2 class="h2">${esc(t("fbPreview"))}</h2>${card(og["og:title"], og["og:description"], og["og:image"])}</div>
+    <div class="card"><h2 class="h2">${esc(t("twPreview"))}</h2>${card(twitter["twitter:title"] || og["og:title"], twitter["twitter:description"] || og["og:description"], twitter["twitter:image"] || twitter["twitter:image:src"] || og["og:image"])}</div></div></div>`;
 }
 
 function schema(){
   const sc = state.meta.schema;
-  if (!sc.jsonld.length && !sc.microdata.length && !sc.rdfa.length) return `<div class="box"><div class="empty">${esc(t("noSchema"))}</div><p class="muted" style="margin:.6em 0 0">${esc(lang === "vi" ? "Gợi ý: thêm JSON-LD Organization và WebSite cho trang chủ, Article cho bài viết, Product cho sản phẩm." : "Tip: add Organization and WebSite JSON-LD on the homepage, Article on posts, Product on product pages.")}</p></div>`;
-  return `${sc.jsonld.map((b, i) => `<details class="sd" ${i === 0 ? "open" : ""}><summary><span class="chip ${b.valid ? "good" : "bad"}">${esc(t("jsonld"))} · ${esc(t(b.valid ? "valid" : "invalid"))}</span>${b.types.map(x => `<span class="chip acc">${esc(x)}</span>`).join("")}${b.error ? `<span class="muted mono">${esc(b.error)}</span>` : ""}</summary><pre class="mono">${esc(b.json)}</pre></details>`).join("")}
-    ${sc.microdata.length ? `<div class="box" style="margin-top:10px"><h2>${esc(t("microdata"))}</h2>${sc.microdata.map(x => `<div class="mono">${esc(x)}</div>`).join("")}</div>` : ""}
-    ${sc.rdfa.length ? `<div class="box" style="margin-top:10px"><h2>${esc(t("rdfa"))}</h2>${sc.rdfa.map(x => `<div class="mono">${esc(x)}</div>`).join("")}</div>` : ""}`;
+  if (!sc.jsonld.length && !sc.microdata.length && !sc.rdfa.length) return `<div class="card"><span class="miss">${esc(t("noSchema"))}</span><p class="muted" style="margin:0">${esc(t("schemaTip"))}</p></div>`;
+  return `${sc.jsonld.map((b, i) => `<details class="sd" ${i === 0 ? "open" : ""}><summary><span class="badge ${b.valid ? "ok" : "bad"}">${esc(t("jsonld"))} · ${esc(t(b.valid ? "valid" : "invalid"))}</span>${b.types.map(x => `<span class="badge line">${esc(x)}</span>`).join("")}${b.error ? `<span class="muted mono">${esc(b.error)}</span>` : ""}</summary><pre>${esc(b.json)}</pre></details>`).join("")}
+    ${sc.microdata.length ? `<div class="card" style="margin-top:12px"><h2 class="h2">${esc(t("microdata"))}</h2>${sc.microdata.map(x => `<div class="mono">${esc(x)}</div>`).join("")}</div>` : ""}
+    ${sc.rdfa.length ? `<div class="card" style="margin-top:12px"><h2 class="h2">${esc(t("rdfa"))}</h2>${sc.rdfa.map(x => `<div class="mono">${esc(x)}</div>`).join("")}</div>` : ""}`;
 }
 
 function tools(){
   const groups = {};
   state.meta.tools.forEach(x => (groups[x.group] = groups[x.group] || []).push(x));
-  return Object.entries(groups).map(([g, list]) => `<div class="box" style="margin-bottom:14px"><h2>${esc(t("groups")[g] || g)}</h2><div class="toolgrid">${list.map(x => `<a href="${safeHref(x.href)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}<span>↗</span></a>`).join("")}</div></div>`).join("");
+  return `<div class="stack">${Object.entries(groups).map(([g, list]) => `<div class="card"><h2 class="h2">${esc(t("groups")[g] || g)}</h2><div class="toolgrid">${list.map(x => `<a href="${safeHref(x.href)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}<span aria-hidden="true">↗</span></a>`).join("")}</div></div>`).join("")}</div>`;
 }
+
+function logBox(a){ return a && (a.log || []).length ? `<details class="logbox"><summary>${esc(t("progressLog"))}</summary><pre class="log" style="margin-top:10px">${esc(a.log.join("\n"))}</pre></details>` : ""; }
 
 function audit(){
-  if (!state.auditOn) return `<div class="box">${esc(t("auditOff"))}</div>`;
-  const a = state.audit;
-  if (state.auditError || (a && a.status === "error")) return `<div class="box"><div class="note">${esc(t("auditError"))}: ${esc(state.auditError || (lang === "vi" ? a.error_vi || a.error : a.error))}</div>${a ? logBox(a) : ""}</div>`;
-  if (!a || !a.result) return `<div class="box">${stagesBar(a)}</div>${a ? logBox(a) : ""}`;
+  const a = state.audit, st = auditState();
+  if (st === "off") return `<div class="card">${esc(t("auditOff"))}</div>`;
+  if (st === "error") return `<div class="cols audit"><div class="card inverse"><span class="eyebrow">${esc(t("siteCardLabel")(0))}</span><div class="alert">${esc(t("auditError"))}: ${esc(auditErr())}</div>${logBox(a)}</div></div>`;
+  if (st === "running") return `<div class="cols audit"><div class="card inverse"><div class="card-head"><span class="eyebrow">${esc(t("siteCardLabel")(0))}</span><span class="mono" style="color:var(--inv-muted);font-size:12px">${elapsed(a)}</span></div>
+      <div><b style="font-family:var(--display);font-size:24px;display:block">${esc(t("running"))}</b><span style="color:var(--inv-muted);font-size:14px">${esc(runLabel(a))}</span></div>
+      ${steps(a)}<p style="margin:0;font-size:13px;color:var(--inv-muted)">${esc(t("closeNote"))}</p>${logBox(a)}</div>
+      <div class="card"><h2 class="h2">${esc(t("actionsPending"))}</h2><p class="muted" style="margin:0">${esc(t("actionsWait"))}</p></div></div>`;
   const r = a.result;
-  const acts = r.actions;
-  return `<div class="grid2">
-    <div class="stack"><div class="box"><h2>${esc(t("areas"))} <span class="chip acc">${r.overall}% · ${esc(r.grade)}</span></h2>
-      ${r.partial.length ? `<div class="note" style="margin-bottom:12px">${esc(t("partial"))}: ${(lang === "vi" ? r.partial_vi : r.partial).map(esc).join("; ")}</div>` : ""}
-      ${catBars(r.categories)}
-      <p class="muted" style="font-size:.82rem;margin:.9em 0 0">${esc(t("pagesCrawled")(r.pages_crawled))}${r.hit_page_cap ? " · " + esc(t("capHit")) : ""} · ${esc(t("passRules")(r.passed_rules))}</p></div>
-      <div class="box"><h2>${esc(t("downloads"))}</h2><div class="dl">${(a.files || []).map(f => `<a class="btn primary" href="/api/audits/${encodeURIComponent(a.id)}/files/${encodeURIComponent(f)}">${esc(f.split(".").pop().toUpperCase())}</a>`).join("") || `<span class="muted">${esc(t("none"))}</span>`}</div></div>
-      ${logBox(a)}</div>
-    <div class="box"><h2>${esc(t("actions"))} <span style="display:flex;gap:4px"><span class="pri P1 chip">P1 ${r.counts.P1}</span><span class="pri P2 chip">P2 ${r.counts.P2}</span><span class="pri P3 chip">P3 ${r.counts.P3}</span></span></h2>
-      ${acts.map(x => `<details class="act"><summary><span class="pri ${x.priority}">${esc(x.priority)}</span><span><b>${esc(lang === "vi" ? x.title_vi : x.title)}</b><div class="meta">
-        <span class="chip">${esc(lang === "vi" ? x.category_vi : x.category)}</span><span class="chip">${esc(t("impact"))} ${x.impact}</span><span class="chip">${esc(t("effort"))} ${x.effort}/4</span>${x.quick_win ? `<span class="chip good">${esc(t("quickWin"))}</span>` : ""}${x.heuristic ? `<span class="chip">${esc(t("heuristic"))}</span>` : ""}${x.needs_review ? `<span class="chip warn">${esc(t("toVerify"))}</span>` : ""}</div></span><span class="muted mono">×${x.count}</span></summary>
-        <div class="inner"><div><b>${esc(t("fix"))}:</b> ${esc(lang === "vi" ? x.fix_vi : x.fix)}</div><div><b>${esc(t("evidence"))}:</b> <span class="muted">${esc(x.evidence)}</span></div>
-        ${x.urls.length ? `<div><b>${esc(t("pages"))}:</b><ul>${x.urls.map(u => `<li>${link(u)}</li>`).join("")}</ul></div>` : ""}
-        ${x.source ? `<div><b>${esc(t("source"))}:</b> ${link(x.source)}</div>` : ""}<div class="muted mono">${esc(x.action_id)} · ${esc(x.id)}</div></div></details>`).join("") || `<p class="muted">${esc(t("noActions"))}</p>`}
+  const acts = r.actions.filter(x => state.pri === "all" || x.priority === state.pri);
+  const shown = state.showAll ? acts : acts.slice(0, 12);
+  const open = state.openAct ?? (acts[0] && acts[0].action_id);
+  const fb = (id, label, cls) => `<button type="button" class="${cls || ""}" data-pri="${id}" aria-pressed="${state.pri === id}">${esc(label)}</button>`;
+  const files = {"report.pdf": "dlPdf", "report.xlsx": "dlXlsx", "report.md": "dlMd"};
+  return `<div class="cols audit">
+    <div class="stack">
+      <div class="card inverse"><div class="card-head"><span class="eyebrow">${esc(t("siteCardLabel")(0))} · ${esc(r.domain)}</span><span class="mono" style="color:var(--inv-muted);font-size:12px">${esc(t("pagesCrawled")(r.pages_crawled))}</span></div>
+        <div class="big"><span class="num" style="font-size:clamp(88px,9vw,120px)">${r.overall}<small>%</small></span><span class="grade" style="color:${r.overall >= 75 ? "#8FD3A8" : r.overall >= 60 ? "#F4C77A" : "#F6A195"}">${esc(t("grade")(r.grade))}</span></div>
+        ${ruler(r.overall)}
+        ${r.partial.length ? `<div class="note">${esc(t("partial"))}: ${(lang === "vi" ? r.partial_vi : r.partial).map(esc).join("; ")}</div>` : ""}
+        ${r.hit_page_cap ? `<p style="margin:0;font-size:13px;color:var(--inv-muted)">${esc(t("capHit"))}</p>` : ""}
+      </div>
+      <div class="card"><div class="card-head"><h2 class="h2">${esc(t("areas")(r.categories.length))}</h2><span class="muted" style="font-size:13px">${esc(t("weightNote"))}</span></div>
+        <div class="cats">${r.categories.map(c => `<div class="cat"><div class="row"><span>${esc(lang === "vi" ? c.name_vi : c.name)} <span class="w">(${esc(c.weight)})</span></span>${c.score == null ? `<span class="val na">${esc(t("notAssessed"))}</span>` : `<span class="val" style="color:${gvar(c.score)}">${c.score}%</span>`}</div><div class="track"><i style="width:${c.score ?? 0}%;background:${c.score == null ? "transparent" : gvar(c.score)}"></i></div></div>`).join("")}</div>
+        <p class="muted" style="font-size:13px;margin:4px 0 0">${esc(t("passRules")(r.passed_rules))}</p></div>
+      <div class="card"><h2 class="h2">${esc(t("downloads"))}</h2><div class="dl">${(a.files || []).map(f => `<a href="/api/audits/${encodeURIComponent(a.id)}/files/${encodeURIComponent(f)}"><b>${esc(f.split(".").pop().toUpperCase())}</b><span>${esc(t(files[f] || "none"))}</span></a>`).join("") || none()}</div>${logBox(a)}</div>
+    </div>
+    <div class="card" style="gap:8px"><div class="card-head" style="align-items:center"><h2 class="h2" style="font-size:28px">${esc(t("actionsTitle")(r.actions.length))}</h2>
+      <div class="filters" role="group">${fb("all", t("filterAll"))}${fb("P1", `P1 · ${r.counts.P1}`, "p1")}${fb("P2", `P2 · ${r.counts.P2}`, "p2")}${fb("P3", `P3 · ${r.counts.P3}`)}</div></div>
+      <div>${shown.map(x => `<details class="act" data-act="${esc(x.action_id)}" ${x.action_id === open ? "open" : ""}><summary><span class="pri ${esc(x.priority)}">${esc(x.priority)}</span>
+        <div><div class="t">${esc(lang === "vi" ? x.title_vi : x.title)}</div><div class="m">${esc([lang === "vi" ? x.category_vi : x.category, `${t("impact")} ${x.impact}`, `${t("effort")} ${x.effort}/4`].concat(x.quick_win ? [t("quickWin")] : [], x.heuristic ? [t("heuristic")] : [], x.needs_review ? [t("toVerify")] : []).join(" · "))}</div></div>
+        <span class="mono muted">×${esc(x.count)}</span></summary>
+        <div class="inner"><b>${esc(t("fix"))}</b><span>${esc(lang === "vi" ? x.fix_vi : x.fix)}</span>
+          <b>${esc(t("evidence"))}</b><span class="mono" style="color:var(--ink-2)">${esc(x.evidence)}</span>
+          ${x.urls.length ? `<b>${esc(t("pages"))}</b><ul>${x.urls.map(u => `<li class="mono">${link(u)}</li>`).join("")}</ul>` : ""}
+          ${x.source ? `<b>${esc(t("source"))}</b><span>${link(x.source)}</span>` : ""}</div></details>`).join("") || `<p class="muted">${esc(t("noActions"))}</p>`}</div>
+      ${acts.length > shown.length ? `<button type="button" class="more" data-more>${esc(t("showMore")(acts.length - shown.length))}</button>` : ""}
     </div></div>`;
 }
-
-function logBox(a){ return `<div class="box"><h2>${esc(t("progressLog"))}</h2><pre class="log mono">${esc((a.log || []).join("\n"))}</pre></div>`; }
 
 /* ---------- interactions ---------- */
 function csv(rows){ return rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")).join("\r\n"); }
@@ -641,22 +845,24 @@ function exportCsv(kind){
 }
 function bind(){
   const p = $("#panel");
-  p.querySelectorAll("[data-goto]").forEach(b => b.onclick = () => {state.tab = b.dataset.goto; render(); window.scrollTo({top: $("#tabs").offsetTop - 10});});
   p.querySelectorAll("[data-lf]").forEach(b => b.onclick = () => {state.linkFilter = b.dataset.lf; render();});
   p.querySelectorAll("[data-hl]").forEach(b => b.onclick = () => {state.hLevel = +b.dataset.hl; render();});
   p.querySelectorAll("[data-imgmissing]").forEach(b => b.onclick = () => {state.imgMissing = !state.imgMissing; render();});
   p.querySelectorAll("[data-csv]").forEach(b => b.onclick = () => exportCsv(b.dataset.csv));
+  p.querySelectorAll("[data-pri]").forEach(b => b.onclick = () => {state.pri = b.dataset.pri; state.showAll = false; state.openAct = null; render();});
+  p.querySelectorAll("[data-more]").forEach(b => b.onclick = () => {state.showAll = true; render();});
+  p.querySelectorAll("details.act").forEach(d => d.addEventListener("toggle", () => { if (d.open) state.openAct = d.dataset.act; else if (state.openAct === d.dataset.act) state.openAct = ""; }));
   p.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
-    try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = t("copied"); } catch (e) { const r = document.createRange(); r.selectNodeContents(b.previousElementSibling.previousElementSibling || b); getSelection().removeAllRanges(); getSelection().addRange(r); }
+    try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = t("copied"); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(b.parentElement.querySelector(".v") || b); getSelection().removeAllRanges(); getSelection().addRange(r); }
   });
   const q = $("#link-q"); if (q) q.oninput = () => {state.linkQuery = q.value; render();};
 }
 
 applyLang();
-recent();
 fetch("/healthz").then(r => r.json()).then(d => $("#ver").textContent = d.version).catch(() => {});
 const initial = new URLSearchParams(location.search).get("url");
-if (initial) { $("#url").value = initial; run(); }
+if (initial) { $("#url").value = initial.replace(/^https?:\/\//, ""); run(initial); }
 </script>
 </body>
 </html>
