@@ -1,0 +1,17 @@
+# docker compose up -d --build   then open http://localhost:8000
+services:
+  jev-seo:
+    build: .
+    image: jev-seo:latest
+    container_name: jev-seo
+    ports:
+      - "${JEVSEO_PORT:-8000}:8000"
+    env_file:
+      - path: .env        # TYPESAFE_API_KEY, PAGESPEED_API_KEY, DATAFORSEO_* (copy from .env.example)
+        required: false
+    volumes:
+      - jevseo-data:/data # audits and PDF, XLSX, MD reports survive restarts
+    restart: unless-stopped
+
+volumes:
+  jevseo-data:

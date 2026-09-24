@@ -115,7 +115,7 @@ Các tab lấy theo tiện ích SEO META in 1 CLICK:
 
 Không có `TYPESAFE_API_KEY` thì audit vẫn chạy, nhưng ghi rõ là audit một phần. Audit chạy lần lượt từng cái một, còn phân tích một trang chạy song song. Server từ chối các địa chỉ mạng nội bộ.
 
-Deploy: `docker build -t jev-seo . && docker run -p 8000:8000 --env-file .env jev-seo`, hoặc dùng [Render](https://render.com/deploy?repo=https://github.com/huydepzai121/jev-seo) với `render.yaml` có sẵn trong repo.
+Cài bằng Docker: `docker compose up -d --build` rồi mở http://localhost:8000. Hướng dẫn cài đặt đầy đủ (Docker, Python, Windows, Render, VPS với HTTPS, xử lý lỗi) nằm trong **[CAI-DAT.md](CAI-DAT.md)**.
 
 ## What runs where, and what it costs
 

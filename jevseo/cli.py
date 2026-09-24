@@ -261,6 +261,8 @@ def doctor(_args) -> None:
             report[mod] = "ok"
         except ImportError as err:
             report[mod] = f"missing ({err.name})"
+        except OSError as err:  # WeasyPrint raises this when the Pango system library is absent
+            report[mod] = f"missing system library ({str(err).splitlines()[0][:120]})"
     report["TYPESAFE_API_KEY"] = "present" if secret("TYPESAFE_API_KEY") else "missing: Jev judgments will be skipped"
     report["PAGESPEED_API_KEY"] = "present" if secret("PAGESPEED_API_KEY") else "missing: PageSpeed runs unkeyed and may be rate limited"
     report["DATAFORSEO"] = "present (needed only for --full)" if secret("DATAFORSEO_USERNAME") and secret("DATAFORSEO_PASSWORD") else "missing: --full mode unavailable"
