@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Web app (`jevseo serve`): enter a URL and get an instant one-page inspection with an on-page score out of 100, then the full site audit score, ranked actions and PDF, XLSX and Markdown downloads, with live progress.
+- One-page inspector in the style of SEO META in 1 CLICK: summary tags with length checks, Google, Facebook and X previews, heading outline, images, links with filters and CSV export, Open Graph and Twitter tags, JSON-LD and microdata, robots.txt and sitemap, and shortcuts to third-party checkers.
+- Vietnamese interface by default, with English one click away; every rule's title and fix is translated.
+- Dockerfile (non-root, health check, `/data` volume), `docker-compose.yml` and `render.yaml` for hosting the web app; Vietnamese install guide in `CAI-DAT.md`.
+- `doctor` reports a missing Pango library instead of crashing.
+
 ## 0.1.1 (2026-09-22)
 
 Found by a clean-machine test (fresh clone, empty home folder, no keys):

@@ -1,0 +1,12 @@
+# One-click deploy on Render: https://render.com/deploy?repo=https://github.com/huydepzai121/jev-seo
+services:
+  - type: web
+    name: jev-seo
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: TYPESAFE_API_KEY
+        sync: false
+      - key: PAGESPEED_API_KEY
+        sync: false

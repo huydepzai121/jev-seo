@@ -10,7 +10,7 @@
 
 jev-seo is a **live SEO audit for any website, from one homepage URL**. It crawls the site, checks it against 52 rules tied to Google Search Central, measures Core Web Vitals, and asks [Jev](https://docs.typesafe.ai/primitives), TypeSafe's System One model, typed questions about every page. Code scores and ranks every fix, and you get a designed PDF, an Excel action tracker and a Markdown report, all built from the same data.
 
-It runs as a Claude Code skill (`/jev-seo https://example.com`) or from the command line. The standard mode needs no SEO data subscription and costs about a cent in Jev per site. An optional `--full` mode adds rankings, keywords and backlinks from DataForSEO for about 0.30 USD.
+It runs as a Claude Code skill (`/jev-seo https://example.com`), from the command line, or as a web app (`jevseo serve`, Vietnamese and English). The standard mode needs no SEO data subscription and costs about a cent in Jev per site. An optional `--full` mode adds rankings, keywords and backlinks from DataForSEO for about 0.30 USD.
 
 <p align="left"><img src="docs/assets/preview-summary.jpg" alt="Cover, executive summary and plan of a jev-seo PDF report" width="880"></p>
 
@@ -90,6 +90,33 @@ bin/jevseo audit https://example.com --full --reuse-dfs <dir>   # reuse DataForS
 bin/jevseo rescore jev-seo-reports/<dir>                        # rebuild findings and scores offline, no spend
 ```
 
+## Web app (giao diện web)
+
+```sh
+bin/jevseo serve                     # http://localhost:8000
+bin/jevseo serve --host 0.0.0.0 --port 8080
+```
+
+Nhập URL rồi bấm **Phân tích**. Trang được đọc ngay và chấm điểm on-page theo % (20 tiêu chí), rồi toàn site được audit ở nền, có tiến trình trực tiếp. Kết quả gồm điểm tổng %, điểm từng hạng mục, danh sách việc cần làm đã xếp hạng, và file PDF, XLSX, Markdown để tải. Giao diện mặc định là tiếng Việt, bấm **EN** để chuyển sang tiếng Anh. Có thể mở thẳng `/?url=ten-mien.vn` để chạy ngay.
+
+Các tab lấy theo tiện ích SEO META in 1 CLICK:
+
+| Tab | Nội dung |
+| --- | --- |
+| Tổng quan | Điểm trang %, điểm toàn site %, 20 tiêu chí đạt/cảnh báo/lỗi, xem trước trên Google, robots.txt và sitemap |
+| Tóm tắt | Title và description kèm độ dài, URL, canonical, robots, X-Robots-Tag, keywords, lang, charset, viewport, số từ, thời gian phản hồi, author, publisher, favicon, hreflang |
+| Tiêu đề | Số lượng H1 đến H6 và cấu trúc tiêu đề, lọc theo cấp, tải CSV |
+| Hình ảnh | Ảnh thiếu alt, alt rỗng, thiếu title, thiếu kích thước, tải CSV |
+| Liên kết | Nội bộ, ra ngoài, nofollow, anchor rỗng, tìm kiếm, tải CSV |
+| Mạng xã hội | Thẻ Open Graph và Twitter, xem trước Facebook và X |
+| Schema | Các khối JSON-LD (hợp lệ hoặc lỗi cú pháp), microdata, RDFa |
+| Công cụ | PageSpeed, Rich Results Test, Schema Validator, W3C, Facebook Debugger và các công cụ khác cho đúng URL đó |
+| Audit toàn site | 52 quy tắc, điểm theo hạng mục, việc cần làm P1 đến P3 kèm cách sửa, bằng chứng và nguồn |
+
+Không có `TYPESAFE_API_KEY` thì audit vẫn chạy, nhưng ghi rõ là audit một phần. Audit chạy lần lượt từng cái một, còn phân tích một trang chạy song song. Server từ chối các địa chỉ mạng nội bộ.
+
+Cài bằng Docker: `docker compose up -d --build` rồi mở http://localhost:8000. Hướng dẫn cài đặt đầy đủ (Docker, Python, Windows, Render, VPS với HTTPS, xử lý lỗi) nằm trong **[CAI-DAT.md](CAI-DAT.md)**.
+
 ## What runs where, and what it costs
 
 <p align="left"><img src="docs/assets/pipeline.svg" alt="How a jev-seo audit runs" width="880"></p>
@@ -138,7 +165,8 @@ SKILL.md              Claude Code skill: workflow, options, rules
 bin/jevseo            runs the package from any directory
 jevseo/               crawl, parse, checks, jev, dfs, psi, score, cli
 jevseo/report/        view model, charts, pdf, xlsx, md
-jevseo/templates/     report HTML and CSS
+jevseo/templates/     report HTML and CSS, web app page
+jevseo/web.py         web app server; jevseo/meta.py one-page inspector
 references/           narrative contract, Jev question registry, evaluation, method
 examples/             a complete example audit
 docs/assets/          README images
